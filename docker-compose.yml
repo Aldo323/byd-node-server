@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  byd-landing-server:
+    build: .
+    container_name: byd_landing_server
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    restart: unless-stopped
+    volumes:
+      - ./public:/app/public:ro
+      - ./views:/app/views:ro
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

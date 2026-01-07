@@ -1,0 +1,565 @@
+/* BYD Landing Page - Estilos más grandes para mejor legibilidad */
+
+/* Importar estilos originales */
+@import url('styles.css');
+
+/* Sobrescribir tamaños para hacerlos más grandes */
+body {
+    font-size: 20px !important;
+}
+
+/* Navegación más grande */
+.navbar {
+    padding: 1.5rem 0 !important;
+}
+
+.logo {
+    height: 45px !important;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem !important;
+    margin: 0 1.5rem !important;
+}
+
+/* Hero Section - Textos más grandes */
+.hero-content h1 {
+    font-size: 4.5rem !important;
+}
+
+/* Ajuste especial para la imagen de la Shark con tema eléctrico */
+.hero-car {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(0, 122, 255, 0.3));
+    position: relative;
+}
+
+/* Contenedor para efectos eléctricos */
+.col-lg-6 {
+    position: relative;
+}
+
+/* Partículas de electrones */
+.electron {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #00D4FF;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00D4FF, 0 0 20px #00D4FF, 0 0 30px #00D4FF;
+}
+
+.electron-path {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: rotate 20s linear infinite;
+}
+
+.electron-path:nth-child(1) { animation-duration: 15s; }
+.electron-path:nth-child(2) { animation-duration: 20s; animation-direction: reverse; }
+.electron-path:nth-child(3) { animation-duration: 25s; }
+.electron-path:nth-child(4) { animation-duration: 18s; animation-direction: reverse; }
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Rayos eléctricos */
+.lightning {
+    position: absolute;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, #00D4FF, transparent);
+    opacity: 0;
+    animation: lightning 3s infinite;
+}
+
+.lightning:nth-child(1) { left: 20%; animation-delay: 0s; }
+.lightning:nth-child(2) { left: 50%; animation-delay: 1s; }
+.lightning:nth-child(3) { left: 80%; animation-delay: 2s; }
+
+@keyframes lightning {
+    0%, 95%, 100% { opacity: 0; transform: translateY(-20px); }
+    50% { opacity: 1; transform: translateY(0); }
+}
+
+/* Grid eléctrico de fondo */
+.electric-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-pulse 4s ease-in-out infinite;
+}
+
+@keyframes grid-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.1; }
+}
+
+/* Anillo de energía alrededor del vehículo */
+.energy-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 50%;
+    animation: pulse-ring 3s ease-in-out infinite;
+}
+
+.energy-ring::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #00D4FF;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes pulse-ring {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+}
+
+/* Texto con efecto eléctrico */
+.hero-content h1 {
+    text-shadow: 
+        0 0 10px rgba(0, 122, 255, 0.8),
+        0 0 20px rgba(0, 122, 255, 0.6),
+        0 0 30px rgba(0, 122, 255, 0.4);
+    animation: electric-text 2s ease-in-out infinite alternate;
+}
+
+@keyframes electric-text {
+    from { text-shadow: 
+        0 0 10px rgba(0, 122, 255, 0.8),
+        0 0 20px rgba(0, 122, 255, 0.6),
+        0 0 30px rgba(0, 122, 255, 0.4); 
+    }
+    to { text-shadow: 
+        0 0 15px rgba(0, 212, 255, 1),
+        0 0 30px rgba(0, 212, 255, 0.8),
+        0 0 45px rgba(0, 212, 255, 0.6); 
+    }
+}
+
+.hero-content .lead {
+    font-size: 1.5rem !important;
+    margin-bottom: 2rem !important;
+}
+
+.hero-buttons .btn {
+    font-size: 1.25rem !important;
+    padding: 1rem 2.5rem !important;
+}
+
+/* Stats Section más grande */
+.stat-box {
+    padding: 3rem 2rem !important;
+}
+
+.stat-box i {
+    font-size: 4rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.stat-box h3 {
+    font-size: 3.5rem !important;
+    font-weight: 700 !important;
+}
+
+.stat-box p {
+    font-size: 1.3rem !important;
+}
+
+/* Sección de vehículos más grande */
+.section-header h2 {
+    font-size: 3.5rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.section-header .lead {
+    font-size: 1.5rem !important;
+}
+
+.vehicle-card {
+    transform: scale(1.1);
+    margin: 2rem 0;
+}
+
+.vehicle-info h3 {
+    font-size: 2rem !important;
+    margin-bottom: 0.8rem !important;
+}
+
+.vehicle-info p {
+    font-size: 1.2rem !important;
+}
+
+.features-list li {
+    font-size: 1.1rem !important;
+    padding: 0.6rem 0 !important;
+}
+
+.vehicle-price .price {
+    font-size: 2rem !important;
+}
+
+.vehicle-card .btn {
+    font-size: 1.2rem !important;
+    padding: 0.8rem 1.5rem !important;
+}
+
+/* Vehicle Selector Styles */
+.vehicle-selector .btn-check:checked + .btn-outline-primary {
+    background-color: #007AFF !important;
+    border-color: #007AFF !important;
+    color: white !important;
+}
+
+.vehicle-selector .btn-check:checked + .btn-outline-success {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
+}
+
+.vehicle-selector .btn {
+    transition: all 0.3s ease !important;
+}
+
+.vehicle-selector .btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+
+/* Badge styles for vehicle types */
+.badge.hybrid {
+    background-color: #007AFF !important;
+}
+
+.badge.electric {
+    background-color: #28a745 !important;
+}
+
+/* Tecnología - textos más grandes */
+.tech-feature h3 {
+    font-size: 2.5rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.tech-feature p {
+    font-size: 1.3rem !important;
+    line-height: 1.8 !important;
+}
+
+.tech-list li {
+    font-size: 1.2rem !important;
+    padding: 0.8rem 0 !important;
+}
+
+/* Calculadora más grande */
+.calculator-card {
+    padding: 3rem !important;
+}
+
+.calculator-card .form-label {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.8rem !important;
+}
+
+.calculator-card .form-control {
+    font-size: 1.2rem !important;
+    padding: 0.8rem 1.2rem !important;
+    height: auto !important;
+}
+
+.calculator-card .btn {
+    font-size: 1.3rem !important;
+    padding: 1rem 2rem !important;
+}
+
+.result-box h4 {
+    font-size: 1.5rem !important;
+}
+
+.result-value {
+    font-size: 2.5rem !important;
+}
+
+/* Why BYD más grande */
+.feature-box i {
+    font-size: 5rem !important;
+}
+
+.feature-box h4 {
+    font-size: 1.8rem !important;
+    margin: 1rem 0 !important;
+}
+
+.feature-box p {
+    font-size: 1.2rem !important;
+    line-height: 1.8 !important;
+}
+
+/* Formulario de contacto más grande */
+.contact-info h3 {
+    font-size: 2rem !important;
+}
+
+.info-item h5 {
+    font-size: 1.4rem !important;
+}
+
+.info-item p {
+    font-size: 1.2rem !important;
+}
+
+.contact-form .form-control {
+    font-size: 1.2rem !important;
+    padding: 1rem 1.5rem !important;
+}
+
+.contact-form textarea {
+    font-size: 1.2rem !important;
+}
+
+/* Footer más grande */
+.footer-section {
+    font-size: 1.1rem !important;
+}
+
+.footer-section h5 {
+    font-size: 1.6rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem !important;
+}
+
+.footer-links a {
+    font-size: 1.2rem !important;
+}
+
+.social-links a {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.5rem !important;
+}
+
+/* Modal más grande */
+.modal-dialog {
+    max-width: 700px !important;
+}
+
+.modal-header h5 {
+    font-size: 1.8rem !important;
+}
+
+.modal-body {
+    padding: 2rem !important;
+}
+
+.modal-body .form-label {
+    font-size: 1.2rem !important;
+}
+
+.modal-body .form-control {
+    font-size: 1.2rem !important;
+    padding: 0.8rem 1.2rem !important;
+}
+
+/* Botón de WhatsApp más grande */
+.whatsapp-button {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 2.5rem !important;
+    bottom: 30px !important;
+    right: 30px !important;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .logo {
+        height: 35px !important;
+    }
+    
+    .navbar {
+        padding: 0.8rem 0 !important;
+    }
+    
+    body {
+        font-size: 16px !important;
+    }
+    
+    .hero-content h1 {
+        font-size: 3rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .hero-content .lead {
+        font-size: 1.2rem !important;
+    }
+    
+    .hero-buttons .btn {
+        font-size: 1rem !important;
+        padding: 0.8rem 1.5rem !important;
+        margin: 0.5rem 0 !important;
+    }
+    
+    .section-header h2 {
+        font-size: 2.5rem !important;
+    }
+    
+    .section-header .lead {
+        font-size: 1.2rem !important;
+    }
+    
+    .vehicle-card {
+        transform: scale(1);
+        margin: 1rem 0;
+    }
+    
+    .vehicle-info h3 {
+        font-size: 1.6rem !important;
+    }
+    
+    .vehicle-info p {
+        font-size: 1rem !important;
+    }
+    
+    .features-list li {
+        font-size: 1rem !important;
+    }
+    
+    .stat-box {
+        padding: 2rem 1.5rem !important;
+    }
+    
+    .stat-box h3 {
+        font-size: 2.5rem !important;
+    }
+    
+    .stat-box i {
+        font-size: 3rem !important;
+    }
+    
+    .calculator-card {
+        padding: 2rem 1.5rem !important;
+    }
+    
+    .tech-feature h3 {
+        font-size: 2rem !important;
+    }
+    
+    .tech-feature p {
+        font-size: 1.1rem !important;
+    }
+    
+    .feature-box i {
+        font-size: 3.5rem !important;
+    }
+    
+    .feature-box h4 {
+        font-size: 1.4rem !important;
+    }
+    
+    .feature-box p {
+        font-size: 1rem !important;
+    }
+    
+    .whatsapp-button {
+        width: 60px !important;
+        height: 60px !important;
+        font-size: 1.8rem !important;
+    }
+}
+
+/* Ajustes adicionales para móviles pequeños */
+@media (max-width: 480px) {
+    .logo {
+        height: 30px !important;
+    }
+    
+    body {
+        font-size: 14px !important;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.2rem !important;
+    }
+    
+    .hero-content .lead {
+        font-size: 1rem !important;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem !important;
+    }
+    
+    .stat-box {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    .stat-box h3 {
+        font-size: 2rem !important;
+    }
+    
+    .vehicle-info {
+        padding: 1.5rem !important;
+    }
+    
+    .calculator-card {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    .whatsapp-button {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.5rem !important;
+        bottom: 20px !important;
+        right: 20px !important;
+    }
+}
+
+/* Ocultar botones en dispositivos muy pequeños */
+@media (max-width: 499px) {
+    .hero-buttons {
+        display: none !important;
+    }
+    
+    .hero-content .lead {
+        margin-bottom: 0 !important;
+    }
+}
+/* Badge styles */
+.hot {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+}
+
+.coming-soon {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 5px rgba(102, 126, 234, 0.5); }
+    to { box-shadow: 0 0 20px rgba(102, 126, 234, 0.8); }
+}

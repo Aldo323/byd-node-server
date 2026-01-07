@@ -1,0 +1,1331 @@
+/* BYD Landing Page Styles */
+
+:root {
+    --primary-color: #007AFF;
+    --secondary-color: #FF6B6B;
+    --dark-color: #1a1a1a;
+    --light-color: #f8f9fa;
+    --text-color: #333;
+    --shadow: 0 5px 15px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* Header Styles */
+.header-main {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.navbar {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    transition: var(--transition);
+}
+
+.navbar-scrolled {
+    padding: 0.5rem 0;
+    box-shadow: var(--shadow);
+}
+
+.logo {
+    height: 35px;
+    filter: brightness(0) invert(1);
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    margin: 0 1rem;
+    transition: var(--transition);
+    position: relative;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23007AFF" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+    background-size: cover;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    background: linear-gradient(45deg, #007AFF, #00D4FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+}
+
+.hero-car {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #007AFF, #0056b3);
+    border: none;
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0,122,255,0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,122,255,0.4);
+}
+
+.btn-outline-light {
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: var(--transition);
+}
+
+.btn-outline-light:hover {
+    background: #fff;
+    color: var(--dark-color);
+    transform: translateY(-3px);
+}
+
+/* Stats Section */
+.stats-section {
+    background: var(--light-color);
+    position: relative;
+}
+
+.stat-box {
+    padding: 2rem;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.stat-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.stat-box i {
+    color: var(--primary-color);
+}
+
+.stat-box h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin: 1rem 0;
+}
+
+.counter {
+    display: inline-block;
+}
+
+/* Vehicles Section */
+.vehicles-section {
+    background: #fff;
+    position: relative;
+}
+
+.section-header {
+    margin-bottom: 4rem;
+}
+
+.vehicle-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.vehicle-image {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+    background: var(--light-color);
+}
+
+.vehicle-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: var(--transition);
+}
+
+.vehicle-card:hover .vehicle-image img {
+    transform: scale(1.1);
+}
+
+.vehicle-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.vehicle-badge.hot {
+    background: var(--secondary-color);
+}
+
+.vehicle-badge.popular {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+    animation: popularPulse 2s ease-in-out infinite;
+}
+
+@keyframes popularPulse {
+    0%, 100% { 
+        transform: scale(1); 
+        box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+    }
+    50% { 
+        transform: scale(1.05); 
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.5);
+    }
+}
+
+.vehicle-info {
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.features-list li {
+    padding: 0.5rem 0;
+    color: #666;
+}
+
+.features-list i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+.vehicle-price {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.vehicle-price .from {
+    display: block;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.vehicle-price .price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Technology Section */
+.technology-section {
+    background: var(--light-color);
+}
+
+.tech-feature h3 {
+    color: var(--dark-color);
+    font-weight: 700;
+}
+
+.tech-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.tech-list li {
+    padding: 0.8rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.tech-list i {
+    color: #4CAF50;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.tech-image img {
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    background: var(--light-color);
+    padding: 5rem 0;
+    overflow: hidden;
+}
+
+.testimonials-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: 0 -15px;
+}
+
+.carousel-track {
+    display: flex;
+    animation: scroll 40s linear infinite;
+    width: max-content;
+}
+
+.testimonial-slide {
+    width: 400px;
+    margin: 0 15px;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+}
+
+.testimonial-slide:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.testimonial-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.testimonial-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.testimonial-slide:hover .testimonial-image img {
+    transform: scale(1.05);
+}
+
+.delivery-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(40, 167, 69, 0.9);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.testimonial-content {
+    padding: 1.5rem;
+}
+
+.testimonial-content .stars {
+    color: #FFD700;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.testimonial-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1rem;
+    min-height: 60px;
+}
+
+.testimonial-author h6 {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.25rem;
+}
+
+.testimonial-author small {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+/* Carousel Animation */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause animation on hover */
+.testimonials-carousel:hover .carousel-track {
+    animation-play-state: paused;
+}
+
+/* Responsive adjustments for carousel */
+@media (max-width: 768px) {
+    .testimonial-slide {
+        width: 300px;
+    }
+    
+    .testimonial-image {
+        height: 200px;
+    }
+    
+    .carousel-track {
+        animation: scroll 30s linear infinite;
+    }
+}
+
+/* Savings Calculator */
+.savings-section {
+    background: #fff;
+}
+
+.calculator-card {
+    background: var(--light-color);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0,122,255,0.25);
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+.savings-result {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+}
+
+.result-box {
+    padding: 1.5rem;
+    background: var(--light-color);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.result-box h4 {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.result-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+/* Why BYD Section */
+.why-byd-section {
+    background: var(--light-color);
+}
+
+.feature-box {
+    padding: 2rem;
+    background: #fff;
+    border-radius: 15px;
+    height: 100%;
+    transition: var(--transition);
+}
+
+/* Testimonial Cards for Real User Section */
+.testimonial-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 2rem;
+    height: 100%;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.testimonial-header {
+    margin-bottom: 1rem;
+}
+
+.vehicle-model {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.testimonial-quote {
+    font-style: italic;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.testimonial-stats {
+    display: flex;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.stat-item i {
+    color: var(--primary-color);
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow);
+}
+
+.feature-box i {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.feature-box h4 {
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+/* Contact Section */
+.contact-section {
+    background: #fff;
+}
+
+.contact-info {
+    padding: 2rem;
+    background: var(--light-color);
+    border-radius: 15px;
+    height: 100%;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-right: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.info-item h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+.contact-form {
+    background: var(--light-color);
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+/* Footer */
+.footer-section {
+    background: var(--dark-color);
+    color: #fff;
+    padding: 4rem 0 2rem;
+}
+
+.footer-logo {
+    height: 60px;
+    filter: brightness(0) invert(1);
+}
+
+.social-links {
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    color: #fff;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: #fff;
+    padding-left: 5px;
+}
+
+.footer-divider {
+    border-color: rgba(255,255,255,0.1);
+    margin: 3rem 0 2rem;
+}
+
+/* WhatsApp Button */
+.whatsapp-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 80px;
+    height: 80px;
+    background: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: var(--transition);
+    z-index: 999;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.whatsapp-button.salma-photo {
+    background: none;
+    border: 3px solid #25D366;
+}
+
+.whatsapp-button:hover {
+    transform: scale(1.05);
+    color: #fff;
+    background: #20ba5a;
+}
+
+.whatsapp-button.salma-photo:hover {
+    background: none;
+    border-color: #20ba5a;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 20px;
+    border: none;
+}
+
+.modal-header {
+    background: var(--light-color);
+    border-radius: 20px 20px 0 0;
+    border-bottom: none;
+    padding: 2rem;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .logo {
+        height: 30px;
+    }
+    
+    .navbar {
+        padding: 0.5rem 0;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-content .lead {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .navbar-nav {
+        text-align: center;
+        padding: 1rem 0;
+    }
+    
+    .navbar-nav .nav-link {
+        margin: 0.5rem 0;
+        padding: 0.75rem 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .stat-box {
+        margin-bottom: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .stat-box h3 {
+        font-size: 2rem;
+    }
+    
+    .stat-box i {
+        font-size: 2.5rem !important;
+    }
+    
+    .vehicle-image {
+        height: 180px;
+    }
+    
+    .vehicle-info {
+        padding: 1.5rem;
+    }
+    
+    .vehicle-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .calculator-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .whatsapp-button {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .section-header .lead {
+        font-size: 1rem;
+    }
+    
+    .feature-box {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .feature-box i {
+        font-size: 3rem !important;
+    }
+    
+    .feature-box h4 {
+        font-size: 1.3rem;
+    }
+    
+    .contact-info {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .info-item {
+        margin-bottom: 1.5rem;
+    }
+    
+    .footer-section {
+        padding: 3rem 0 1.5rem;
+    }
+    
+    .footer-logo {
+        height: 40px;
+    }
+}
+
+/* Mejoras adicionales para móvil */
+@media (max-width: 480px) {
+    .logo {
+        height: 28px;
+    }
+    
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content .lead {
+        font-size: 0.95rem;
+    }
+    
+    .stat-box {
+        padding: 1rem;
+    }
+    
+    .stat-box h3 {
+        font-size: 1.8rem;
+    }
+    
+    .vehicle-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .vehicle-info {
+        padding: 1rem;
+    }
+    
+    .btn-primary, .btn-outline-light {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .testimonial-slide {
+        width: 280px;
+    }
+    
+    .testimonial-content {
+        padding: 1rem;
+    }
+    
+    .modal-dialog {
+        margin: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+}
+
+/* Loading Animation */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 100px;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 998;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    background: #0056b3;
+    transform: translateY(-3px);
+}
+
+/* Mejoras adicionales para móvil */
+@media (max-width: 480px) {
+    /* Mejor navbar mobile */
+    .navbar-toggler {
+        border: none;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+    
+    .navbar-collapse {
+        background: rgba(26, 26, 26, 0.98);
+        border-radius: 10px;
+        margin-top: 0.5rem;
+        padding: 1rem;
+    }
+    
+    /* Mejor espaciado en tarjetas de vehículos */
+    .vehicle-card .row {
+        margin-top: 1rem;
+    }
+    
+    .vehicle-card .btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+    }
+    
+    /* Mejor legibilidad en textos */
+    .features-list li {
+        font-size: 0.9rem;
+        padding: 0.4rem 0;
+    }
+    
+    /* Optimizar formulario de cotización */
+    .form-control {
+        font-size: 16px; /* Evita zoom en iOS */
+    }
+    
+    /* Mejorar carousel de testimonios */
+    .carousel-track {
+        animation: scroll 25s linear infinite;
+    }
+    
+    /* Mejor spacing para hero section */
+    .hero-section {
+        padding: 0 10px;
+    }
+    
+    /* Footer más compacto */
+    .footer-section {
+        padding: 2rem 0 1rem;
+    }
+    
+    .footer-section .row > div {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Vehicle Gallery Styles */
+.vehicle-gallery-section {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.vehicle-gallery-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 122, 255, 0.05) 0%, transparent 70%);
+    animation: rotate-slow 30s linear infinite;
+}
+
+@keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.gallery-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Main Image Container */
+.main-image-container {
+    position: relative;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.main-gallery-image {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    cursor: zoom-in;
+}
+
+.main-gallery-image:hover {
+    transform: scale(1.05);
+}
+
+/* Gallery Navigation Arrows */
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-nav:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-nav-prev {
+    left: 20px;
+}
+
+.gallery-nav-next {
+    right: 20px;
+}
+
+.gallery-nav i {
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+/* Image Counter */
+.image-counter {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+}
+
+/* Thumbnail Container */
+.thumbnail-container {
+    margin-top: 2rem;
+}
+
+.thumbnail-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail-wrapper.active {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3);
+}
+
+.thumbnail-wrapper:hover:not(.active) {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.thumbnail-wrapper img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.thumbnail-wrapper:hover img {
+    transform: scale(1.1);
+}
+
+.thumbnail-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 122, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail-wrapper:hover .thumbnail-overlay {
+    opacity: 1;
+}
+
+.thumbnail-overlay i {
+    color: white;
+    font-size: 24px;
+}
+
+/* Gallery Modal */
+.gallery-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.gallery-modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.gallery-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.gallery-close:hover {
+    color: var(--primary-color);
+}
+
+.gallery-modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+.modal-nav-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    pointer-events: all;
+}
+
+.modal-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.modal-nav-btn i {
+    font-size: 24px;
+}
+
+/* Responsive Gallery */
+@media (max-width: 768px) {
+    .main-gallery-image {
+        height: 400px;
+    }
+    
+    .gallery-nav {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .gallery-nav-prev {
+        left: 10px;
+    }
+    
+    .gallery-nav-next {
+        right: 10px;
+    }
+    
+    .thumbnail-wrapper img {
+        height: 100px;
+    }
+    
+    .gallery-modal-content {
+        max-width: 100%;
+        max-height: 80vh;
+    }
+    
+    .modal-nav-btn {
+        width: 50px;
+        height: 50px;
+    }
+}

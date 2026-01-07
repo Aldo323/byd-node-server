@@ -1,0 +1,71 @@
+version: '3.8'
+
+# Blue-Green Deployment para salmabydriver.com
+# Blue = puerto 8085 (actual)
+# Green = puerto 8086 (nuevo)
+
+services:
+  salma-blue:
+    image: byd-node-server:latest
+    container_name: salmabydriver_blue
+    ports:
+      - "127.0.0.1:8085:3001"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DB_HOST=0cf310234e2b_postgres_byd
+      - DB_PORT=5432
+      - DB_DATABASE=byd_calculator_db
+      - DB_USER=postgres
+      - DB_PASSWORD=${DB_PASSWORD}
+      - PORT=3001
+      - SMS_GATEWAY_URL=https://sms.lizza.com.mx
+      - SMS_API_KEY=${SMS_API_KEY}
+      - NODE_ENV=production
+    volumes:
+      - ./views:/app/views:ro
+      - ./public:/app/public:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3001"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - salma_network
+
+  salma-green:
+    image: byd-node-server:latest
+    container_name: salmabydriver_green
+    ports:
+      - "127.0.0.1:8086:3001"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DB_HOST=0cf310234e2b_postgres_byd
+      - DB_PORT=5432
+      - DB_DATABASE=byd_calculator_db
+      - DB_USER=postgres
+      - DB_PASSWORD=${DB_PASSWORD}
+      - PORT=3001
+      - SMS_GATEWAY_URL=https://sms.lizza.com.mx
+      - SMS_API_KEY=${SMS_API_KEY}
+      - NODE_ENV=production
+    volumes:
+      - ./views:/app/views:ro
+      - ./public:/app/public:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3001"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - salma_network
+    profiles:
+      - green  # Solo se inicia cuando se activa explícitamente
+
+networks:
+  salma_network:
+    external: true
+    name: bridge

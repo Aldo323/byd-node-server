@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2H9XL972Q9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2H9XL972Q9');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Calculadora de Ahorros BYD - Monterrey | Salma - Tu Asesora Personal BYD</title>
+    <meta name="description" content="Calcula tus ahorros con vehículos BYD eléctricos e híbridos. Compara costos de combustible vs electricidad con tarifas CFE reales.">
+    <link rel="icon" type="image/png" href="/images/byd/bydicono.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        /* Prevent double-tap zoom on mobile */
+        * {
+            touch-action: manipulation;
+        }
+
+        /* ============================================
+           HERO BANNER STYLES
+        ============================================ */
+        .hero-banner {
+            background: linear-gradient(135deg, #0093D6 0%, #00B4D8 50%, #0077B6 100%);
+            padding: 6rem 0 0;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: -80px;
+            padding-bottom: 120px;
+        }
+
+        /* Efectos visuales de fondo (partículas) */
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        }
+
+        /* Degradado inferior para transición suave */
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(
+                to bottom, 
+                transparent 0%, 
+                rgba(245, 247, 250, 0.4) 40%, 
+                rgba(245, 247, 250, 0.8) 70%, 
+                #f5f7fa 100%
+            );
+            z-index: 1;
+        }
+
+        /* Título principal */
+        .hero-title {
+            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Subtítulo destacado en amarillo */
+        .hero-subtitle {
+            color: #FFD93D;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Descripción */
+        .hero-description {
+            margin-bottom: 3rem;
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .calculator-section {
+            min-height: 100vh;
+            padding-top: 0;
+            padding-bottom: 3rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 3rem;
+            margin: 0 auto;
+            max-width: 1000px;
+            position: relative;
+            top: -40px;
+        }
+        
+        .vehicle-selector {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .vehicle-selector h3,
+        .vehicle-selector h4,
+        .vehicle-selector label {
+            color: #1a1a1a;
+        }
+
+        .vehicle-selector small.text-muted {
+            color: #666666 !important;
+        }
+
+        .vehicle-selector .form-control {
+            color: #333333;
+        }
+
+        .vehicle-selector select option {
+            color: #333333;
+        }
+        
+        .result-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .result-card h2 {
+            color: #1a1a1a;
+        }
+
+        .result-card h5 {
+            color: #333333;
+        }
+        
+        .savings-highlight {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #28a745;
+            margin: 1rem 0;
+        }
+        
+        .stat-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .stat-box h4 {
+            color: #1a1a1a;
+        }
+
+        .stat-box i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .btn-calculate {
+            background: linear-gradient(45deg, #28a745, #20c997, #007bff);
+            background-size: 200% 200%;
+            color: white;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: gradientShift 3s ease infinite;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        .btn-calculate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+            animation-duration: 1.5s;
+        }
+        
+        .btn-calculate:active {
+            transform: translateY(-1px);
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .vehicle-option {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0.5rem 0;
+            background: #ffffff;
+        }
+
+        .vehicle-option h4 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .vehicle-option p {
+            color: #555555;
+        }
+
+        .vehicle-option i {
+            color: #0077B6;
+        }
+
+        .vehicle-option:hover {
+            border-color: var(--primary-color);
+            background: #f0f8ff;
+        }
+
+        .vehicle-option.selected {
+            border-color: var(--primary-color);
+            background: #e6f2ff;
+        }
+        
+        .calculation-mode {
+            padding: 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0.5rem 0;
+            text-align: center;
+        }
+        
+        .calculation-mode:hover {
+            border-color: var(--primary-color);
+            background: #f0f8ff;
+        }
+        
+        .calculation-mode.selected {
+            border-color: var(--primary-color);
+            background: #e6f2ff;
+        }
+        
+        .input-group-text {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .preview-stat {
+            padding: 1rem;
+            border-radius: 8px;
+            background: white;
+            margin: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .preview-stat strong {
+            font-size: 1.5rem;
+            color: #333333;
+        }
+
+        .preview-stat small {
+            color: #555555;
+        }
+        
+        #calculationPreview {
+            border: 2px solid var(--primary-color);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .comparison-table {
+            margin-top: 2rem;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .cost-breakdown {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .cost-breakdown h4 {
+            color: #1a1a1a;
+        }
+
+        .cost-breakdown td {
+            color: #333333;
+        }
+
+        .cost-breakdown td strong {
+            color: #1a1a1a;
+        }
+        
+        .hybrid-breakdown {
+            margin-top: 2rem;
+        }
+        
+        .usage-metric {
+            padding: 1rem;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            margin: 0.5rem;
+        }
+
+        .usage-metric i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .usage-metric h6 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #555555;
+        }
+
+        .usage-metric small {
+            color: #666666;
+        }
+        
+        .vehicle-image-display {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .vehicle-preview-image {
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .vehicle-preview-image:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Monthly Savings Hero Styles */
+        .monthly-savings-hero {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .monthly-savings-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+        }
+        
+        .savings-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .savings-amount {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            position: relative;
+            z-index: 1;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .savings-message {
+            font-size: 1.2rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+           ANIMACIONES
+        ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-banner {
+                padding: 5rem 0 0;
+                padding-bottom: 100px;
+                margin-bottom: -60px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.75rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .calculator-section {
+                padding-top: 80px;
+                padding-bottom: 40px;
+            }
+            
+            .calculator-card {
+                padding: 1.5rem;
+                margin: 1rem 0;
+            }
+            
+            .display-4 {
+                font-size: 2rem;
+            }
+            
+            .vehicle-selector {
+                padding: 1.5rem;
+            }
+            
+            .savings-highlight {
+                font-size: 2rem;
+            }
+            
+            .stat-box {
+                padding: 1rem;
+                margin: 0.5rem 0;
+            }
+            
+            .stat-box i {
+                font-size: 2rem;
+            }
+            
+            .btn-calculate {
+                padding: 0.75rem 2rem;
+                font-size: 1.1rem;
+                width: 100%;
+            }
+            
+            .result-card {
+                padding: 1.5rem;
+            }
+            
+            /* Monthly Savings Hero Mobile */
+            .monthly-savings-hero {
+                padding: 2rem;
+                border-radius: 15px;
+            }
+            
+            .savings-title {
+                font-size: 1.2rem;
+            }
+            
+            .savings-amount {
+                font-size: 3rem;
+            }
+            
+            .savings-message {
+                font-size: 1rem;
+            }
+            
+            /* Vehicle options mobile */
+            .vehicle-option {
+                margin-bottom: 1rem;
+            }
+            
+            .vehicle-option h4 {
+                font-size: 1.2rem;
+            }
+            
+            .vehicle-option p {
+                font-size: 0.9rem;
+            }
+            
+            /* Preview stats mobile */
+            .preview-stat {
+                margin: 0.25rem;
+                padding: 0.75rem;
+            }
+            
+            .preview-stat strong {
+                font-size: 1.2rem;
+            }
+            
+            .preview-stat small {
+                font-size: 0.75rem;
+            }
+            
+            /* Form labels and inputs mobile */
+            .form-label {
+                font-size: 0.9rem;
+            }
+            
+            .form-control-lg {
+                font-size: 1rem;
+                padding: 0.5rem 0.75rem;
+            }
+            
+            /* Comparison table mobile */
+            .comparison-table td {
+                padding: 0.75rem;
+                font-size: 1rem;
+            }
+            
+            /* Usage metrics mobile */
+            .usage-metric {
+                padding: 0.75rem;
+            }
+            
+            .usage-metric i {
+                font-size: 1.5rem;
+            }
+            
+            .usage-metric h6 {
+                font-size: 0.9rem;
+            }
+            
+            .usage-metric .h4 {
+                font-size: 1.25rem !important;
+            }
+            
+            /* Vehicle image display mobile */
+            .vehicle-image-display {
+                padding: 1rem;
+            }
+            
+            .vehicle-preview-image {
+                max-height: 200px;
+            }
+            
+            /* Buttons mobile */
+            #whatsappQuoteBtn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .btn-outline-secondary {
+                width: 100%;
+            }
+            
+            /* Alert boxes mobile */
+            .alert {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            /* Cost breakdown mobile */
+            .cost-breakdown {
+                padding: 1rem;
+            }
+            
+            .cost-breakdown h4 {
+                font-size: 1.3rem;
+            }
+            
+            /* Hybrid breakdown mobile */
+            .hybrid-breakdown .alert-heading {
+                font-size: 1.1rem;
+            }
+            
+            /* Navigation adjustments */
+            .navbar-brand .logo {
+                height: 40px;
+            }
+        }
+        
+        /* Vehicle Carousel Styles */
+        .vehicle-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #f8f9fa;
+            padding: 0 80px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .vehicle-slider {
+            display: flex;
+            transition: transform 0.3s ease;
+            gap: 0;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .vehicle-card {
+            min-width: 100%;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border: 3px solid #e9ecef;
+            border-radius: 50px;
+            cursor: default;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: 15px 0;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .vehicle-card.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .vehicle-card.active.selected {
+            border-color: #007bff;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0,123,255,0.3);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .vehicle-card.active.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #007bff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .vehicle-card img {
+            width: 220px;
+            height: 130px;
+            object-fit: contain;
+            margin: 0 auto 1.5rem auto;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            transition: transform 0.3s ease;
+        }
+        
+        
+        .vehicle-card h4 {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .vehicle-card.active.selected h4 {
+            color: #0056b3;
+        }
+        
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #007bff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .carousel-nav:hover {
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .carousel-nav.prev {
+            left: 15px;
+            z-index: 20;
+        }
+        
+        .carousel-nav.next {
+            right: 15px;
+            z-index: 20;
+        }
+        
+
+        /* Extra small devices */
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .calculator-card {
+                padding: 1rem;
+                top: -30px;
+            }
+            
+            .display-4 {
+                font-size: 1.75rem;
+            }
+            
+            .lead {
+                font-size: 1rem;
+            }
+            
+            .vehicle-selector {
+                padding: 1rem;
+            }
+            
+            .vehicle-selector h3 {
+                font-size: 1.3rem;
+            }
+            
+            .vehicle-carousel {
+                padding: 0 60px;
+            }
+            
+            .vehicle-card {
+                padding: 1.5rem;
+            }
+            
+            .vehicle-card img {
+                width: 150px;
+                height: 90px;
+            }
+            
+            .vehicle-card h4 {
+                font-size: 1.2rem;
+            }
+            
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .carousel-nav.prev {
+                left: 10px;
+            }
+            
+            .carousel-nav.next {
+                right: 10px;
+            }
+            
+            /* Monthly savings hero adjustments */
+            .monthly-savings-hero {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .savings-title {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .savings-amount {
+                font-size: 2.5rem;
+                margin: 0.5rem 0;
+            }
+            
+            .savings-message {
+                font-size: 0.9rem;
+                line-height: 1.2;
+            }
+            
+            /* Preview calculation box */
+            #calculationPreview {
+                padding: 1rem !important;
+            }
+            
+            #calculationPreview h5 {
+                font-size: 1.1rem;
+            }
+            
+            .preview-stat {
+                padding: 0.5rem;
+            }
+            
+            .preview-stat strong {
+                font-size: 1rem;
+            }
+            
+            .preview-stat small {
+                font-size: 0.7rem;
+            }
+            
+            /* Stack columns on extra small screens */
+            .row .col-md-3,
+            .row .col-md-4,
+            .row .col-md-6 {
+                margin-bottom: 0.5rem;
+            }
+            
+            /* Input group text mobile */
+            .input-group-text {
+                font-size: 0.9rem;
+                padding: 0.375rem 0.5rem;
+            }
+            
+            /* Small text adjustments */
+            small.text-muted {
+                font-size: 0.75rem;
+            }
+            
+            /* Vehicle options extra small */
+            .vehicle-option {
+                padding: 0.75rem;
+            }
+            
+            .vehicle-option h4,
+            .vehicle-option h5 {
+                font-size: 1rem;
+            }
+            
+            .vehicle-option p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* ============================================
+           PREMIUM NAVIGATION STYLES
+        ============================================ */
+        .nav-premium {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            padding: 1rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-premium.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            padding: 0.75rem 4rem;
+        }
+
+        .nav-logo img {
+            height: 32px;
+            filter: brightness(0) invert(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ffffff;
+        }
+
+        .nav-cta {
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(135deg, #d4af37, #b8962e);
+            border: none;
+            color: #0a0a0a;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 9998;
+            padding: 1rem 0;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .mobile-menu .mobile-cta {
+            color: #d4af37;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .nav-premium {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-banner {
+                padding-top: 5rem;
+            }
+        }
+
+        /* Adjust hero banner for fixed nav */
+        .hero-banner {
+            padding-top: 7rem;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/chat-widget.css">
+</head>
+<body>
+    <!-- Premium Navigation -->
+    <nav class="nav-premium" id="navbar">
+        <div class="nav-logo">
+            <a href="/">
+                <img src="/images/byd/BYD-Logo.png" alt="BYD">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/#modelos">Modelos</a></li>
+            <li><a href="/#experiencia">Experiencia</a></li>
+            <li><a href="/#asesora">Tu Asesora</a></li>
+            <li><a href="/calculatusahorros" class="active">Calculadora</a></li>
+        </ul>
+        <button class="nav-cta" onclick="openWhatsApp()">Agendar Cita</button>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="/#modelos" onclick="toggleMobileMenu()">Modelos</a></li>
+            <li><a href="/#experiencia" onclick="toggleMobileMenu()">Experiencia</a></li>
+            <li><a href="/#asesora" onclick="toggleMobileMenu()">Tu Asesora</a></li>
+            <li><a href="/calculatusahorros" onclick="toggleMobileMenu()">Calculadora</a></li>
+            <li><a href="#" onclick="openWhatsApp(); toggleMobileMenu();" class="mobile-cta">Agendar Cita</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Banner Section -->
+    <section class="hero-banner">
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="text-center">
+                <h1 class="hero-title">
+                    Descubre Cuánto Puedes Ahorrar<br>
+                    <span class="hero-subtitle">con un BYD Eléctrico</span>
+                </h1>
+                
+                <p class="hero-description">
+                    Calcula tu ahorro en segundos y recibe un reporte personalizado
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calculator-card">
+                <form id="savingsCalculator">
+                    <!-- Vehicle Type Selection -->
+                    <div class="vehicle-selector">
+                        <h3 class="mb-4">1. Selecciona el tipo de vehículo</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="vehicle-option" data-type="electric">
+                                    <h4><i class="fas fa-bolt"></i> 100% Eléctrico</h4>
+                                    <p class="mb-0">Cero emisiones, máximo ahorro</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="vehicle-option" data-type="hybrid">
+                                    <h4><i class="fas fa-battery-half"></i> Híbrido Enchufable</h4>
+                                    <p class="mb-0">Combina electricidad y gasolina</p>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="vehicleType" name="vehicleType" required>
+                    </div>
+
+                    <!-- Model Selection -->
+                    <div class="vehicle-selector" id="modelSelector" style="display: none;">
+                        <h3 class="mb-4">2. Selecciona el modelo</h3>
+                        
+                        <!-- Vehicle Carousel -->
+                        <div class="vehicle-carousel">
+                            <button type="button" class="carousel-nav prev" onclick="prevVehicle()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button type="button" class="carousel-nav next" onclick="nextVehicle()">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            
+                            <div class="vehicle-slider" id="vehicleSlider"></div>
+                        </div>
+                        
+                        <input type="hidden" id="vehicleModel" name="vehicleModel" required>
+                        
+                        <!-- Vehicle Image Display (hidden, used for results) -->
+                        <div id="vehicleImageDisplay" class="vehicle-image-display mt-4" style="display: none;">
+                            <div class="text-center">
+                                <img id="selectedVehicleImage" src="" alt="Vehículo seleccionado" class="img-fluid vehicle-preview-image">
+                                <h4 id="selectedVehicleName" class="mt-3 text-primary"></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unified Usage Parameters -->
+                    <div class="vehicle-selector mb-4">
+                        <h3 class="mb-4">3. Tu uso actual de gasolina</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-money-bill-wave"></i> ¿Cuánto gastas en gasolina por semana?</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control form-control-lg" id="weeklySpending" 
+                                           value="1000" min="100" max="5000" step="50" required>
+                                    <span class="input-group-text">MXN</span>
+                                </div>
+                                <small class="text-muted">Promedio en México: $600-1,200 por semana</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Tipo de gasolina que usas</label>
+                                <select class="form-control form-control-lg" id="gasType">
+                                    <option value="magna">Magna - $<%= gasPrices.magna %>/L</option>
+                                    <option value="premium">Premium - $<%= gasPrices.premium %>/L</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Consumo de tu vehículo actual (km/L)</label>
+                                <select class="form-control form-control-lg" id="currentConsumption">
+                                    <option value="8">Muy alto consumo (8 km/L) - SUV grande, pick-up</option>
+                                    <option value="10">Alto consumo (10 km/L) - SUV mediano, sedán grande</option>
+                                    <option value="12" selected>Consumo medio (12 km/L) - Sedán compacto</option>
+                                    <option value="14">Bajo consumo (14 km/L) - Auto pequeño, híbrido</option>
+                                    <option value="16">Muy bajo consumo (16 km/L) - Auto ultra eficiente</option>
+                                </select>
+                                <small class="text-muted">Si no sabes exactamente, selecciona según tu tipo de vehículo</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Consumo eléctrico de tu hogar (kWh/mes)</label>
+                                <input type="number" class="form-control form-control-lg" id="homeConsumption" 
+                                       value="300" min="0" max="2000" required>
+                                <small class="text-muted">Para calcular tarifas CFE correctas</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Instruction message for calculation -->
+                        <div class="alert alert-info mt-4" role="alert">
+                            <h6 class="alert-heading mb-2"><i class="fas fa-info-circle"></i> ¡Importante!</h6>
+                            <p class="mb-0">Para conocer tus ahorros personalizados con BYD, completa la información anterior y presiona el botón <strong>"💸 Descubre TU Ahorro Ahora"</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Hybrid-specific questions -->
+                    <div id="hybridQuestions" class="vehicle-selector mb-4" style="display: none;">
+                        <h3 class="mb-4">4. Uso específico para vehículo híbrido</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="alert alert-primary">
+                                    <h6><i class="fas fa-calculator"></i> Km diarios calculados:</h6>
+                                    <div class="h4 text-primary"><span id="calculatedDailyKm">0</span> km/día</div>
+                                    <small>Basado en tu gasto semanal actual</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-charging-station"></i> ¿Puedes cargar en tu trabajo/destino?</label>
+                                <select class="form-control form-control-lg" id="chargingAvailability">
+                                    <option value="both">Sí, en casa y trabajo</option>
+                                    <option value="home">Solo en casa</option>
+                                    <option value="none">No tengo donde cargar</option>
+                                </select>
+                                <small class="text-muted">Esto afecta significativamente tus ahorros</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Hybrid usage preview -->
+                        <div id="hybridPreview" class="mt-3 p-3 bg-info bg-opacity-10 rounded">
+                            <h6 class="mb-2"><i class="fas fa-info-circle"></i> Análisis de uso híbrido:</h6>
+                            <div id="hybridAnalysis"></div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-calculate btn-lg">
+                            💸 Descubre TU Ahorro Ahora
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="result-card">
+                    <h2 class="text-center mb-4">Tus Ahorros con BYD <span id="selectedModelName"></span></h2>
+                    
+                    <!-- Usage Summary -->
+                    <div id="usageSummary" class="mt-4 p-3 bg-light rounded mb-4">
+                        <h5 class="mb-3"><i class="fas fa-calculator"></i> Tu patrón de consumo:</h5>
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <div class="preview-stat">
+                                    <strong id="resultLiters">0</strong>
+                                    <br><small>Litros por semana</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="preview-stat">
+                                    <strong id="resultKm">0</strong>
+                                    <br><small>Km por semana</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="preview-stat">
+                                    <strong id="resultKmYear">0</strong>
+                                    <br><small>Km anuales</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="preview-stat">
+                                    <strong id="resultAnnualCost">0</strong>
+                                    <br><small>Gasto anual</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Monthly Savings Hero -->
+                    <div class="monthly-savings-hero text-center mb-5">
+                        <h3 class="savings-title">Ahorro Mensual</h3>
+                        <div class="savings-amount">
+                            $<span id="monthlySavings">0</span>
+                        </div>
+                        <p class="savings-message">¡Eso es dinero extra en tu bolsillo cada mes!</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="stat-box">
+                                <i class="fas fa-piggy-bank"></i>
+                                <h4>Ahorro Anual</h4>
+                                <div class="savings-highlight">$<span id="annualSavings">0</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-box">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Ahorro en 5 años</h4>
+                                <div class="savings-highlight">$<span id="fiveYearSavings">0</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-box">
+                                <i class="fas fa-leaf"></i>
+                                <h4>CO₂ Reducido/año</h4>
+                                <div class="text-success" style="font-size: 2rem; font-weight: bold;">
+                                    <span id="co2Reduction">0</span> kg
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hybrid Usage Breakdown (shown only for hybrid vehicles) -->
+                    <div id="hybridBreakdown" class="hybrid-breakdown" style="display: none;">
+                        <div class="alert alert-primary mt-4">
+                            <h5 class="alert-heading"><i class="fas fa-bolt"></i> Análisis de uso híbrido</h5>
+                            <div id="hybridScenarioText" class="mb-3"></div>
+                            <div class="row text-center">
+                                <div class="col-md-4">
+                                    <div class="usage-metric">
+                                        <i class="fas fa-plug text-success"></i>
+                                        <h6>Uso eléctrico</h6>
+                                        <div class="h4 text-success"><span id="electricUsagePercent">0</span>%</div>
+                                        <small><span id="electricKmDaily">0</span> km/día</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="usage-metric">
+                                        <i class="fas fa-gas-pump text-warning"></i>
+                                        <h6>Uso gasolina</h6>
+                                        <div class="h4 text-warning"><span id="gasUsagePercent">0</span>%</div>
+                                        <small><span id="gasKmDaily">0</span> km/día</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="usage-metric">
+                                        <i class="fas fa-leaf text-success"></i>
+                                        <h6>Eficiencia total</h6>
+                                        <div class="h4 text-primary"><span id="totalEfficiency">0</span> km/L</div>
+                                        <small>equivalente</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cost-breakdown">
+                        <h4 class="mb-3">Desglose de Costos Anuales</h4>
+                        <table class="table comparison-table">
+                            <tr>
+                                <td><strong>Gasto actual en gasolina:</strong></td>
+                                <td class="text-end text-danger">$<span id="currentFuelCost">0</span></td>
+                            </tr>
+                            <tr id="hybridCostRow" style="display: none;">
+                                <td><strong>Gasto con BYD (electricidad + gasolina):</strong></td>
+                                <td class="text-end text-success">$<span id="bydCostHybrid">0</span></td>
+                            </tr>
+                            <tr id="electricCostRow">
+                                <td><strong>Gasto con BYD:</strong></td>
+                                <td class="text-end text-success">$<span id="bydCost">0</span></td>
+                            </tr>
+                            <tr class="table-success">
+                                <td><strong>Tu ahorro anual:</strong></td>
+                                <td class="text-end"><strong>$<span id="totalSavings">0</span></strong></td>
+                            </tr>
+                        </table>
+                        
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Cálculo basado en:</strong> Tarifas CFE escalonadas reales de México, 
+                            precios actuales de gasolina en Monterrey, y datos técnicos oficiales de vehículos BYD.
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+                            <a href="#" id="whatsappQuoteBtn" class="btn btn-success btn-lg" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Solicitar Cotización por WhatsApp
+                            </a>
+                            <button class="btn btn-outline-secondary btn-lg" onclick="resetCalculator()">
+                                <i class="fas fa-redo"></i> Calcular Otro
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="text-center">
+                <p>&copy; 2026 Salma - Asesora de Ventas BYD | Página Personal de Consulta | No representa oficialmente a la agencia</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Vehicle data from server
+        const electricVehicles = <%- JSON.stringify(electricVehicles) %>;
+        const hybridVehicles = <%- JSON.stringify(hybridVehicles) %>;
+        const gasPrices = <%- JSON.stringify(gasPrices) %>;
+        
+        // Vehicle image mapping
+        const vehicleImages = {
+            // Electric vehicles
+            'dolphin': '/images/byd/byd-auto-dolphin-mini_auto_electrico_BYD.webp',
+            'dolphinplus': '/images/byd/byd-auto-dolphin-mini_auto_electrico_BYD_.webp',
+            'seal': '/images/byd/byd-auto-seal_auto_electrico_BYD.png',
+            'sealawd': '/images/byd/byd-seal-new.png',
+            'sealion7': '/images/byd/byd-auto-sealion7_auto_electrico_BYD.png',
+            'yuanpro': '/images/byd/byd-auto-yuan-pro_auto_electrico_BYD.png',
+            
+            // Hybrid vehicles
+            'king': '/images/byd/byd-auto-king_auto_electrico_BYD.png',
+            'shark': '/images/byd/byd-shark-new.webp',
+            'songplus': '/images/byd/byd-auto-song-plus_auto_electrico_BYD.webp',
+            'songpro': '/images/byd/byd-auto-song-pro_auto_electrico_BYD.webp'
+        };
+
+        // Vehicle type selection
+        document.querySelectorAll('.vehicle-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Reset results if user changes vehicle type
+                if (document.getElementById('resultsSection').style.display === 'block') {
+                    resetCalculatorResults();
+                }
+                
+                document.querySelectorAll('.vehicle-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                const type = this.dataset.type;
+                console.log('🚗 Vehicle type selected:', type);
+                document.getElementById('vehicleType').value = type;
+                
+                // Show model selector
+                showModelSelector(type);
+            });
+        });
+
+        // Calculate values for internal use (no display updates)
+        function calculateCurrentUsage() {
+            const weeklySpending = parseFloat(document.getElementById('weeklySpending').value) || 0;
+            const gasType = document.getElementById('gasType').value;
+            const currentConsumption = parseFloat(document.getElementById('currentConsumption').value) || 12;
+            
+            const gasPrice = gasPrices[gasType];
+            
+            // Calculate values
+            const weeklyLiters = weeklySpending / gasPrice;
+            const weeklyKm = weeklyLiters * currentConsumption;
+            const dailyKm = weeklyKm / 7;
+            const annualKm = weeklyKm * 52;
+            const annualCost = weeklySpending * 52;
+            
+            // Update calculated daily km for hybrid analysis (without triggering recursive calls)
+            if (document.getElementById('calculatedDailyKm')) {
+                document.getElementById('calculatedDailyKm').textContent = dailyKm.toFixed(1);
+            }
+            
+            return {
+                weeklyLiters,
+                weeklyKm,
+                dailyKm,
+                annualKm,
+                annualCost
+            };
+        }
+        
+        // Add event listeners for hybrid analysis updates only
+        document.getElementById('weeklySpending').addEventListener('input', calculateCurrentUsage);
+        document.getElementById('gasType').addEventListener('change', calculateCurrentUsage);
+        document.getElementById('currentConsumption').addEventListener('change', calculateCurrentUsage);
+        
+        // Initial calculation for hybrid analysis
+        calculateCurrentUsage();
+        
+        // Initialize WhatsApp button with default message
+        const defaultMessage = encodeURIComponent('Hola! Me interesa obtener información sobre los vehículos BYD y realizar una cotización.');
+        document.getElementById('whatsappQuoteBtn').href = `https://wa.me/528120272752?text=${defaultMessage}`;
+
+        // Carousel variables
+        let currentIndex = 0;
+        let vehicles = [];
+        let vehicleType = '';
+
+        function showModelSelector(type) {
+            const modelSelector = document.getElementById('modelSelector');
+            
+            vehicles = type === 'electric' ? electricVehicles : hybridVehicles;
+            vehicleType = type;
+            currentIndex = 0;
+            
+            console.log('📋 Available vehicles for type', type, ':', vehicles);
+            
+            // Create carousel
+            createVehicleCarousel();
+            
+            modelSelector.style.display = 'block';
+            
+            // Scroll to model selector section
+            setTimeout(() => {
+                modelSelector.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start'
+                });
+            }, 100);
+        }
+        
+        function createVehicleCarousel() {
+            const slider = document.getElementById('vehicleSlider');
+            
+            slider.innerHTML = '';
+            
+            const vehicleEntries = Object.entries(vehicles);
+            
+            vehicleEntries.forEach(([key, vehicle], index) => {
+                // Create vehicle card
+                const card = document.createElement('div');
+                card.className = index === 0 ? 'vehicle-card active' : 'vehicle-card';
+                card.dataset.model = key;
+                card.dataset.index = index;
+                
+                const imageSrc = vehicleImages[key] || '/images/byd/default-car.png';
+                
+                card.innerHTML = `
+                    <img src="${imageSrc}" alt="${vehicle.name}" loading="lazy">
+                    <h4>${vehicle.name}</h4>
+                `;
+                
+                // Remove click event - navigation only through arrows
+                slider.appendChild(card);
+            });
+            
+            // Show first vehicle as selected initially
+            if (vehicleEntries.length > 0) {
+                updateCarouselPosition();
+                // Auto-select the first visible vehicle
+                const firstVehicleKey = vehicleEntries[0][0];
+                selectVehicleFromCarousel(firstVehicleKey, 0);
+            }
+        }
+        
+        function selectVehicleFromCarousel(modelKey, index) {
+            // Reset results if user changes vehicle model
+            if (document.getElementById('resultsSection').style.display === 'block') {
+                resetCalculatorResults();
+            }
+            
+            // Update selected state
+            document.querySelectorAll('.vehicle-card').forEach(card => card.classList.remove('selected'));
+            document.querySelectorAll('.indicator').forEach(ind => ind.classList.remove('active'));
+            
+            const selectedCard = document.querySelector(`[data-model="${modelKey}"]`);
+            selectedCard.classList.add('selected');
+            
+            const indicators = document.querySelectorAll('.indicator');
+            if (indicators[index]) indicators[index].classList.add('active');
+            
+            console.log('🎯 Model selected:', modelKey);
+            document.getElementById('vehicleModel').value = modelKey;
+            
+            // Show hybrid questions if hybrid vehicle selected
+            if (vehicleType === 'hybrid') {
+                document.getElementById('hybridQuestions').style.display = 'block';
+                updateHybridAnalysis();
+            } else {
+                document.getElementById('hybridQuestions').style.display = 'none';
+            }
+        }
+        
+        function updateCarouselPosition() {
+            const slider = document.getElementById('vehicleSlider');
+            const translateX = -currentIndex * 100;
+            slider.style.transform = `translateX(${translateX}%)`;
+            
+            
+            // Update visibility - only show current vehicle
+            document.querySelectorAll('.vehicle-card').forEach((card, index) => {
+                card.classList.toggle('active', index === currentIndex);
+            });
+            
+            // Auto-select the currently visible vehicle
+            const vehicleEntries = Object.entries(vehicles);
+            if (vehicleEntries[currentIndex]) {
+                const [vehicleKey] = vehicleEntries[currentIndex];
+                
+                // Reset results if user changes vehicle model by navigating carousel
+                if (document.getElementById('resultsSection').style.display === 'block') {
+                    resetCalculatorResults();
+                }
+                
+                // Update vehicle selection
+                document.getElementById('vehicleModel').value = vehicleKey;
+                console.log('🎯 Auto-selected model:', vehicleKey);
+                
+                // Update visual selection state
+                document.querySelectorAll('.vehicle-card').forEach(card => card.classList.remove('selected'));
+                const currentCard = document.querySelector(`[data-model="${vehicleKey}"]`);
+                if (currentCard) currentCard.classList.add('selected');
+                
+                // Show hybrid questions if hybrid vehicle is visible
+                if (vehicleType === 'hybrid') {
+                    document.getElementById('hybridQuestions').style.display = 'block';
+                    updateHybridAnalysis();
+                } else {
+                    document.getElementById('hybridQuestions').style.display = 'none';
+                }
+            }
+        }
+        
+        function nextVehicle() {
+            const maxIndex = Object.keys(vehicles).length - 1;
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Cycle back to first vehicle
+            }
+            updateCarouselPosition();
+        }
+        
+        function prevVehicle() {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                const maxIndex = Object.keys(vehicles).length - 1;
+                currentIndex = maxIndex; // Cycle to last vehicle
+            }
+            updateCarouselPosition();
+        }
+        
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarouselPosition();
+        }
+        
+        // Center the current vehicle in viewport
+        function centerCurrentVehicle() {
+            const slider = document.getElementById('vehicleSlider');
+            const translateX = -currentIndex * 100;
+            slider.style.transform = `translateX(${translateX}%)`;
+        }
+        
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let startY = 0;
+        let isDragging = false;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.vehicle-carousel');
+            
+            carousel.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                isDragging = true;
+            });
+            
+            carousel.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                
+                const currentX = e.touches[0].clientX;
+                const currentY = e.touches[0].clientY;
+                const diffX = Math.abs(startX - currentX);
+                const diffY = Math.abs(startY - currentY);
+                
+                // Solo prevenir el comportamiento por defecto si el movimiento es principalmente horizontal
+                if (diffX > diffY) {
+                    e.preventDefault();
+                }
+            });
+            
+            carousel.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
+                const diffX = startX - endX;
+                const diffY = Math.abs(startY - endY);
+                
+                // Solo procesar el swipe si es principalmente horizontal
+                if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY) { // Minimum swipe distance
+                    if (diffX > 0) {
+                        nextVehicle(); // Swipe left - next vehicle
+                    } else {
+                        prevVehicle(); // Swipe right - previous vehicle
+                    }
+                }
+            });
+        });
+
+        function selectModel(e) {
+            // Reset results if user changes vehicle model
+            if (document.getElementById('resultsSection').style.display === 'block') {
+                resetCalculatorResults();
+            }
+            
+            const modelOptions = document.querySelectorAll('#modelOptions .vehicle-option');
+            modelOptions.forEach(opt => opt.classList.remove('selected'));
+            e.currentTarget.classList.add('selected');
+            
+            const selectedModel = e.currentTarget.dataset.model;
+            const vehicleType = document.getElementById('vehicleType').value;
+            console.log('🎯 Model selected:', selectedModel);
+            document.getElementById('vehicleModel').value = selectedModel;
+            
+            // Show vehicle image
+            showVehicleImage(selectedModel, vehicleType);
+            
+            // Show hybrid questions if hybrid vehicle selected
+            if (vehicleType === 'hybrid') {
+                document.getElementById('hybridQuestions').style.display = 'block';
+                updateHybridAnalysis();
+            } else {
+                document.getElementById('hybridQuestions').style.display = 'none';
+            }
+        }
+        
+        // Show vehicle image
+        function showVehicleImage(modelKey, vehicleType) {
+            const vehicles = vehicleType === 'electric' ? electricVehicles : hybridVehicles;
+            const vehicle = vehicles[modelKey];
+            const imageSrc = vehicleImages[modelKey];
+            
+            if (vehicle && imageSrc) {
+                document.getElementById('selectedVehicleImage').src = imageSrc;
+                document.getElementById('selectedVehicleName').textContent = vehicle.name;
+                document.getElementById('vehicleImageDisplay').style.display = 'block';
+                
+                console.log('🖼️ Vehicle image displayed:', vehicle.name, imageSrc);
+            } else {
+                document.getElementById('vehicleImageDisplay').style.display = 'none';
+                console.log('❌ No image found for:', modelKey);
+            }
+        }
+        
+        // Reset only results section (not the entire form)
+        function resetCalculatorResults() {
+            console.log('🔄 Resetting calculator results...');
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('hybridBreakdown').style.display = 'none';
+            
+            // Reset WhatsApp button to default
+            const defaultMessage = encodeURIComponent('Hola! Me interesa obtener información sobre los vehículos BYD y realizar una cotización.');
+            document.getElementById('whatsappQuoteBtn').href = `https://wa.me/528120272752?text=${defaultMessage}`;
+        }
+        
+        // Hybrid vehicle analysis
+        function updateHybridAnalysis() {
+            const vehicleModel = document.getElementById('vehicleModel').value;
+            // Get daily distance from calculation function
+            const usage = calculateCurrentUsage();
+            const dailyDistance = usage.dailyKm || 0;
+            const chargingAvailability = document.getElementById('chargingAvailability').value;
+            
+            if (!vehicleModel || !hybridVehicles[vehicleModel] || dailyDistance === 0) return;
+            
+            const vehicle = hybridVehicles[vehicleModel];
+            const electricRange = vehicle.electricRange;
+            
+            let analysisHTML = '';
+            
+            if (chargingAvailability === 'both') {
+                if (dailyDistance <= electricRange) {
+                    analysisHTML = `
+                        <div class="alert alert-success mb-0">
+                            <strong>¡Excelente escenario!</strong><br>
+                            Tu ${vehicle.name} tiene ${electricRange} km de autonomía eléctrica.<br>
+                            Con ${dailyDistance} km diarios y carga en casa y trabajo, <strong>podrías usar 100% modo eléctrico</strong>.<br>
+                            ¡Prácticamente no usarías gasolina!
+                        </div>`;
+                } else {
+                    const electricKm = electricRange * 2; // Ida y vuelta con carga
+                    const gasKm = Math.max(0, dailyDistance - electricKm);
+                    analysisHTML = `
+                        <div class="alert alert-info mb-0">
+                            <strong>Uso mixto optimizado</strong><br>
+                            Con carga en ambos lugares, usarías:<br>
+                            • Modo eléctrico: ${electricKm} km/día<br>
+                            • Modo gasolina: ${gasKm} km/día<br>
+                            Ahorrarías aproximadamente ${Math.round((electricKm/dailyDistance) * 100)}% en combustible diario.
+                        </div>`;
+                }
+            } else if (chargingAvailability === 'home') {
+                if (dailyDistance <= electricRange) {
+                    analysisHTML = `
+                        <div class="alert alert-success mb-0">
+                            <strong>Buen escenario</strong><br>
+                            Con ${electricRange} km de autonomía y solo ${dailyDistance} km diarios,<br>
+                            puedes hacer tu recorrido completo en modo eléctrico cargando solo en casa.
+                        </div>`;
+                } else {
+                    const gasKm = dailyDistance - electricRange;
+                    analysisHTML = `
+                        <div class="alert alert-warning mb-0">
+                            <strong>Uso mixto</strong><br>
+                            Usarías diariamente:<br>
+                            • Modo eléctrico: ${electricRange} km<br>
+                            • Modo gasolina: ${gasKm} km<br>
+                            Ahorrarías aproximadamente ${Math.round((electricRange/dailyDistance) * 100)}% en combustible.
+                        </div>`;
+                }
+            } else {
+                analysisHTML = `
+                    <div class="alert alert-danger mb-0">
+                        <strong>Sin punto de carga</strong><br>
+                        Sin acceso a carga, el vehículo funcionaría principalmente con gasolina.<br>
+                        Aún tendrías el beneficio del modo híbrido (regeneración, eficiencia) pero no aprovecharías 
+                        el potencial completo del vehículo enchufable.
+                    </div>`;
+            }
+            
+            document.getElementById('hybridAnalysis').innerHTML = analysisHTML;
+        }
+        
+        // Event listeners for hybrid inputs
+        document.getElementById('chargingAvailability').addEventListener('change', updateHybridAnalysis);
+
+        // Form submission
+        document.getElementById('savingsCalculator').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const vehicleType = document.getElementById('vehicleType').value;
+            const vehicleModel = document.getElementById('vehicleModel').value;
+            
+            console.log('📊 Form submission started');
+            console.log('📝 Vehicle Type:', vehicleType);
+            console.log('📝 Vehicle Model:', vehicleModel);
+            
+            if (!vehicleType || !vehicleModel) {
+                console.log('❌ Missing vehicle type or model');
+                alert('Por favor selecciona un tipo de vehículo y modelo');
+                return;
+            }
+            
+            // Unified calculation data using spending-based approach
+            const formData = {
+                vehicleType: vehicleType,
+                vehicleName: vehicleModel,
+                calculationMode: 'spending', // Always use spending mode
+                weeklySpending: parseFloat(document.getElementById('weeklySpending').value),
+                gasType: document.getElementById('gasType').value,
+                homeConsumption: parseFloat(document.getElementById('homeConsumption').value),
+                estimatedConsumption: parseFloat(document.getElementById('currentConsumption').value)
+            };
+            
+            // Add hybrid-specific data if applicable
+            if (vehicleType === 'hybrid') {
+                // Get daily distance from calculation function
+                const usage = calculateCurrentUsage();
+                formData.dailyDistance = usage.dailyKm || 40;
+                formData.chargingAvailability = document.getElementById('chargingAvailability').value;
+                console.log('🔋 Hybrid-specific data:', { 
+                    dailyDistance: formData.dailyDistance, 
+                    chargingAvailability: formData.chargingAvailability 
+                });
+            }
+            
+            console.log('📤 Sending calculation request with data:', formData);
+            
+            try {
+                const response = await fetch('/api/calculate-savings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                console.log('📥 Calculation result received:', result);
+                displayResults(result, vehicleType, vehicleModel);
+            } catch (error) {
+                console.error('❌ Calculation error:', error);
+                alert('Error al calcular. Por favor intenta de nuevo.');
+            }
+        });
+
+        function displayResults(result, type, model) {
+            const vehicles = type === 'electric' ? electricVehicles : hybridVehicles;
+            const vehicleName = vehicles[model].name;
+            
+            document.getElementById('selectedModelName').textContent = vehicleName;
+            document.getElementById('monthlySavings').textContent = result.monthlySavings.toLocaleString('es-MX');
+            document.getElementById('annualSavings').textContent = result.annualSavings.toLocaleString('es-MX');
+            document.getElementById('fiveYearSavings').textContent = result.fiveYearSavings.toLocaleString('es-MX');
+            document.getElementById('co2Reduction').textContent = result.co2Reduction.toLocaleString('es-MX');
+            
+            // Populate usage summary from current calculation
+            const usage = calculateCurrentUsage();
+            
+            document.getElementById('resultLiters').textContent = usage.weeklyLiters.toFixed(2);
+            document.getElementById('resultKm').textContent = usage.weeklyKm.toFixed(0);
+            document.getElementById('resultKmYear').textContent = usage.annualKm.toLocaleString('es-MX', {maximumFractionDigits: 0});
+            document.getElementById('resultAnnualCost').textContent = '$' + usage.annualCost.toLocaleString('es-MX');
+            
+            document.getElementById('currentFuelCost').textContent = result.details.annualFuelCost.toLocaleString('es-MX');
+            document.getElementById('totalSavings').textContent = result.annualSavings.toLocaleString('es-MX');
+            
+            // Handle hybrid vs electric cost display
+            if (type === 'hybrid' && result.hybridDetails) {
+                console.log('🔋 Displaying hybrid details:', result.hybridDetails);
+                
+                // Show hybrid breakdown section
+                document.getElementById('hybridBreakdown').style.display = 'block';
+                document.getElementById('hybridCostRow').style.display = 'table-row';
+                document.getElementById('electricCostRow').style.display = 'none';
+                
+                // Set hybrid scenario description
+                document.getElementById('hybridScenarioText').textContent = result.hybridDetails.scenarioDescription;
+                
+                // Set usage percentages and daily kilometers
+                document.getElementById('electricUsagePercent').textContent = Math.round(result.hybridDetails.electricUsagePercent);
+                document.getElementById('gasUsagePercent').textContent = Math.round(result.hybridDetails.gasUsagePercent);
+                document.getElementById('electricKmDaily').textContent = result.hybridDetails.electricKmDaily.toFixed(1);
+                document.getElementById('gasKmDaily').textContent = result.hybridDetails.gasKmDaily.toFixed(1);
+                document.getElementById('totalEfficiency').textContent = result.hybridDetails.totalEfficiency.toFixed(1);
+                
+                // Set hybrid costs (electricity + gas)
+                const totalHybridCost = result.details.annualElectricityCost + (result.details.annualGasCost || 0);
+                document.getElementById('bydCostHybrid').textContent = totalHybridCost.toLocaleString('es-MX');
+            } else {
+                // Electric vehicle - hide hybrid sections
+                document.getElementById('hybridBreakdown').style.display = 'none';
+                document.getElementById('hybridCostRow').style.display = 'none';
+                document.getElementById('electricCostRow').style.display = 'table-row';
+                document.getElementById('bydCost').textContent = result.details.annualElectricityCost.toLocaleString('es-MX');
+            }
+            
+            // Add animation effect to monthly savings
+            const monthlySavingsEl = document.getElementById('monthlySavings');
+            animateValue(monthlySavingsEl, 0, result.monthlySavings, 1000);
+            
+            // Trigger confetti celebration
+            setTimeout(() => {
+                launchConfetti();
+            }, 500);
+            
+            // Update WhatsApp quote button with personalized message
+            updateWhatsAppQuoteButton(result, type, model);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function updateWhatsAppQuoteButton(result, type, model) {
+            const vehicles = type === 'electric' ? electricVehicles : hybridVehicles;
+            const vehicleName = vehicles[model].name;
+            const monthlySavings = result.monthlySavings.toLocaleString('es-MX');
+            const annualSavings = result.annualSavings.toLocaleString('es-MX');
+            
+            let message = `¡Hola! He calculado mis ahorros con el ${vehicleName} y los resultados son increíbles:\n\n`;
+            message += `💰 Ahorro mensual: $${monthlySavings} MXN\n`;
+            message += `📈 Ahorro anual: $${annualSavings} MXN\n\n`;
+            
+            if (type === 'hybrid' && result.hybridDetails) {
+                message += `🔋 Uso eléctrico: ${result.hybridDetails.electricUsagePercent}%\n`;
+                message += `⛽ Uso gasolina: ${result.hybridDetails.gasUsagePercent}%\n\n`;
+            }
+            
+            message += `Me interesa obtener más información y una cotización personalizada para el ${vehicleName}.\n\n`;
+            message += `¡Gracias!`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/528120272752?text=${encodedMessage}`;
+            
+            document.getElementById('whatsappQuoteBtn').href = whatsappUrl;
+        }
+        
+        // Animation function for numbers
+        function animateValue(element, start, end, duration) {
+            const range = end - start;
+            const startTime = performance.now();
+            
+            function updateValue(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const value = Math.round(start + range * progress);
+                element.textContent = value.toLocaleString('es-MX');
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateValue);
+                }
+            }
+            
+            requestAnimationFrame(updateValue);
+        }
+        
+        // Confetti celebration function
+        function launchConfetti() {
+            // Multiple confetti bursts for better effect
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+            
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+            
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+                
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+                
+                const particleCount = 50 * (timeLeft / duration);
+                
+                // Confetti from the left
+                confetti(Object.assign({}, defaults, {
+                    particleCount,
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                    colors: ['#28a745', '#20c997', '#FFD700', '#FF6B6B', '#4ECDC4']
+                }));
+                
+                // Confetti from the right
+                confetti(Object.assign({}, defaults, {
+                    particleCount,
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                    colors: ['#28a745', '#20c997', '#FFD700', '#FF6B6B', '#4ECDC4']
+                }));
+            }, 250);
+            
+            // Special burst from the center
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#28a745', '#20c997', '#FFD700']
+            });
+        }
+
+        function resetCalculator() {
+            console.log('🔄 Full calculator reset...');
+            document.getElementById('savingsCalculator').reset();
+            document.querySelectorAll('.vehicle-option').forEach(opt => opt.classList.remove('selected'));
+            
+            document.getElementById('modelSelector').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('hybridQuestions').style.display = 'none';
+            document.getElementById('hybridBreakdown').style.display = 'none';
+            document.getElementById('vehicleImageDisplay').style.display = 'none';
+            document.getElementById('vehicleType').value = '';
+            document.getElementById('vehicleModel').value = '';
+            
+            // Reset WhatsApp button to default
+            const defaultMessage = encodeURIComponent('Hola! Me interesa obtener información sobre los vehículos BYD y realizar una cotización.');
+            document.getElementById('whatsappQuoteBtn').href = `https://wa.me/528120272752?text=${defaultMessage}`;
+            
+            // Reset to default values and update calculation
+            document.getElementById('weeklySpending').value = '1000';
+            document.getElementById('currentConsumption').value = '12';
+            calculateCurrentUsage();
+        }
+
+        // ============================================
+        // PREMIUM NAVIGATION FUNCTIONS
+        // ============================================
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+
+        // WhatsApp function
+        function openWhatsApp() {
+            const mensaje = 'Hola Salma! Me interesa agendar una cita para conocer los vehiculos BYD.';
+            window.open(`https://wa.me/528120272752?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('mobileMenu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.remove('open');
+            }
+        });
+    </script>
+    <!-- Chat Widget Salma AI -->
+    <script src="/js/chat-widget.js" defer></script>
+</body>
+</html>

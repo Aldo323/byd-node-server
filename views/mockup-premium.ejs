@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BYD Monterrey | Concesionario Premium - MOCKUP</title>
+    <meta name="description" content="Mockup de nuevo diseno premium para BYD Monterrey">
+    <link rel="icon" type="image/png" href="/images/byd/bydicono.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/mockup-premium.css">
+</head>
+<body>
+    <!-- Premium Navigation -->
+    <nav class="nav-premium" id="navbar">
+        <div class="nav-logo">
+            <a href="#">
+                <img src="/images/byd/BYD-Logo.png" alt="BYD">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#modelos">Modelos</a></li>
+            <li><a href="#experiencia">Experiencia</a></li>
+            <li><a href="#asesora">Tu Asesora</a></li>
+            <li><a href="/calculatusahorros">Calculadora</a></li>
+        </ul>
+        <button class="nav-cta" onclick="openWhatsApp()">Agendar Cita</button>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <!-- Hero Section with Carousel -->
+    <section class="hero-premium">
+        <div class="hero-bg"></div>
+        <div class="hero-gradient-overlay"></div>
+
+        <div class="hero-carousel">
+            <div class="carousel-slides">
+                <!-- Slide 1: BYD King -->
+                <div class="carousel-slide active" data-model="king">
+                    <div class="hero-content">
+                        <p class="hero-tagline">SUV Hibrido Mas Vendido</p>
+                        <h1 class="hero-title">BYD KING</h1>
+                        <p class="hero-subtitle">Potencia hibrida con la mejor autonomia de su clase. El equilibrio perfecto entre rendimiento y eficiencia.</p>
+
+                        <div class="hero-car-container">
+                            <img src="/images/byd/byd-auto-king_auto_electrico_BYD.png" alt="BYD King" class="hero-car">
+                        </div>
+
+                        <div class="hero-specs">
+                            <div class="spec-item">
+                                <div class="spec-value">7.9<span>s</span></div>
+                                <div class="spec-label">0-100 km/h</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-value">1,200<span>km</span></div>
+                                <div class="spec-label">Autonomia Total</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-value">328<span>hp</span></div>
+                                <div class="spec-label">Potencia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: BYD Shark -->
+                <div class="carousel-slide" data-model="shark">
+                    <div class="hero-content">
+                        <p class="hero-tagline">La Primera Pickup Hibrida</p>
+                        <h1 class="hero-title">BYD SHARK</h1>
+                        <p class="hero-subtitle">Revoluciona el segmento pickup con tecnologia hibrida. Potencia para el trabajo, eficiencia para el dia a dia.</p>
+
+                        <div class="hero-car-container">
+                            <img src="/images/byd/byd-shark-new.webp" alt="BYD Shark" class="hero-car">
+                        </div>
+
+                        <div class="hero-specs">
+                            <div class="spec-item">
+                                <div class="spec-value">5.7<span>s</span></div>
+                                <div class="spec-label">0-100 km/h</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-value">840<span>km</span></div>
+                                <div class="spec-label">Autonomia</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-value">437<span>hp</span></div>
+                                <div class="spec-label">Potencia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: BYD Seal -->
+                <div class="carousel-slide" data-model="seal">
+                    <div class="hero-content">
+                        <p class="hero-tagline">Sedan Deportivo Electrico</p>
+                        <h1 class="hero-title">BYD SEAL</h1>
+                        <p class="hero-subtitle">Elegancia deportiva 100% electrica. Aceleracion brutal con cero emisiones y maxima sofisticacion.</p>
+
+                        <div class="hero-car-container">
+                            <img src="/images/byd/byd-seal-new.png" alt="BYD Seal" class="hero-car">
+                        </div>
+
+                        <div class="hero-specs">
+                            <div class="spec-item">
+                                <div class="spec-value">3.8<span>s</span></div>
+                                <div class="spec-label">0-100 km/h</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-value">570<span>km</span></div>
+                                <div class="spec-label">Autonomia</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-value">530<span>hp</span></div>
+                                <div class="spec-label">Potencia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4: BYD Sea Lion 7 -->
+                <div class="carousel-slide" data-model="sealion">
+                    <div class="hero-content">
+                        <p class="hero-tagline">SUV Electrica Premium</p>
+                        <h1 class="hero-title">SEA LION 7</h1>
+                        <p class="hero-subtitle">El SUV electrico que redefine el lujo. Espacio, tecnologia y rendimiento en perfecta armonia.</p>
+
+                        <div class="hero-car-container">
+                            <img src="/images/byd/byd-auto-sealion7_auto_electrico_BYD.png" alt="BYD Sea Lion 7" class="hero-car">
+                        </div>
+
+                        <div class="hero-specs">
+                            <div class="spec-item">
+                                <div class="spec-value">4.5<span>s</span></div>
+                                <div class="spec-label">0-100 km/h</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-value">502<span>km</span></div>
+                                <div class="spec-label">Autonomia</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-value">523<span>hp</span></div>
+                                <div class="spec-label">Potencia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Navigation -->
+            <div class="carousel-arrows">
+                <button class="carousel-arrow" id="prevSlide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-arrow" id="nextSlide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Carousel Dots -->
+            <div class="carousel-dots">
+                <button class="carousel-dot active" data-slide="0"></button>
+                <button class="carousel-dot" data-slide="1"></button>
+                <button class="carousel-dot" data-slide="2"></button>
+                <button class="carousel-dot" data-slide="3"></button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="carousel-progress">
+                <div class="carousel-progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Explorar</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section class="models-section" id="modelos">
+        <div class="section-header">
+            <p class="section-label">Coleccion 2025</p>
+            <h2 class="section-title">Nuestra Gama Completa</h2>
+        </div>
+
+        <div class="models-grid">
+            <!-- BYD King -->
+            <div class="model-card">
+                <span class="model-badge">Popular</span>
+                <div class="model-image">
+                    <img src="/images/byd/byd-auto-king_auto_electrico_BYD.png" alt="BYD King">
+                </div>
+                <div class="model-info">
+                    <p class="model-category">SUV Hibrido Enchufable</p>
+                    <h3 class="model-name">BYD King</h3>
+                    <p class="model-price">Desde <strong>$799,980 MXN</strong></p>
+                    <div class="model-features">
+                        <div class="feature">
+                            <div class="feature-value">1,200 km</div>
+                            <div class="feature-label">Autonomia Total</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">7.9s</div>
+                            <div class="feature-label">0-100</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">328 hp</div>
+                            <div class="feature-label">Potencia</div>
+                        </div>
+                    </div>
+                    <div class="model-actions">
+                        <a href="#" class="btn-primary-premium" onclick="openWhatsApp('King')">Cotizar</a>
+                        <a href="/vehiculo/king" class="btn-secondary-premium">Descubrir</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BYD Shark -->
+            <div class="model-card">
+                <span class="model-badge new">Nuevo</span>
+                <div class="model-image">
+                    <img src="/images/byd/byd-shark-new.webp" alt="BYD Shark">
+                </div>
+                <div class="model-info">
+                    <p class="model-category">Pickup Hibrida</p>
+                    <h3 class="model-name">BYD Shark</h3>
+                    <p class="model-price">Desde <strong>$899,980 MXN</strong></p>
+                    <div class="model-features">
+                        <div class="feature">
+                            <div class="feature-value">840 km</div>
+                            <div class="feature-label">Autonomia</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">5.7s</div>
+                            <div class="feature-label">0-100</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">437 hp</div>
+                            <div class="feature-label">Potencia</div>
+                        </div>
+                    </div>
+                    <div class="model-actions">
+                        <a href="#" class="btn-primary-premium" onclick="openWhatsApp('Shark')">Reservar</a>
+                        <a href="/vehiculo/shark" class="btn-secondary-premium">Descubrir</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BYD Seal -->
+            <div class="model-card">
+                <span class="model-badge new">Nuevo</span>
+                <div class="model-image">
+                    <img src="/images/byd/byd-seal-new.png" alt="BYD Seal">
+                </div>
+                <div class="model-info">
+                    <p class="model-category">Sedan Deportivo Electrico</p>
+                    <h3 class="model-name">BYD Seal</h3>
+                    <p class="model-price">Desde <strong>$849,980 MXN</strong></p>
+                    <div class="model-features">
+                        <div class="feature">
+                            <div class="feature-value">570 km</div>
+                            <div class="feature-label">Autonomia</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">3.8s</div>
+                            <div class="feature-label">0-100</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">530 hp</div>
+                            <div class="feature-label">Potencia</div>
+                        </div>
+                    </div>
+                    <div class="model-actions">
+                        <a href="#" class="btn-primary-premium" onclick="openWhatsApp('Seal')">Cotizar</a>
+                        <a href="/vehiculo/seal" class="btn-secondary-premium">Descubrir</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BYD Sea Lion 7 -->
+            <div class="model-card">
+                <div class="model-image">
+                    <img src="/images/byd/byd-auto-sealion7_auto_electrico_BYD.png" alt="BYD Sea Lion 7">
+                </div>
+                <div class="model-info">
+                    <p class="model-category">SUV Electrico</p>
+                    <h3 class="model-name">BYD Sea Lion 7</h3>
+                    <p class="model-price">Desde <strong>$779,980 MXN</strong></p>
+                    <div class="model-features">
+                        <div class="feature">
+                            <div class="feature-value">502 km</div>
+                            <div class="feature-label">Autonomia</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">4.5s</div>
+                            <div class="feature-label">0-100</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">523 hp</div>
+                            <div class="feature-label">Potencia</div>
+                        </div>
+                    </div>
+                    <div class="model-actions">
+                        <a href="#" class="btn-primary-premium" onclick="openWhatsApp('Sea Lion 7')">Cotizar</a>
+                        <a href="/vehiculo/sealion7" class="btn-secondary-premium">Descubrir</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dolphin Mini -->
+            <div class="model-card">
+                <div class="model-image">
+                    <img src="/images/byd/byd-auto-dolphin-mini_auto_electrico_BYD.webp" alt="BYD Dolphin Mini">
+                </div>
+                <div class="model-info">
+                    <p class="model-category">Compacto Electrico</p>
+                    <h3 class="model-name">BYD Dolphin Mini</h3>
+                    <p class="model-price">Desde <strong>$398,800 MXN</strong></p>
+                    <div class="model-features">
+                        <div class="feature">
+                            <div class="feature-value">340 km</div>
+                            <div class="feature-label">Autonomia</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">12s</div>
+                            <div class="feature-label">0-100</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">75 hp</div>
+                            <div class="feature-label">Potencia</div>
+                        </div>
+                    </div>
+                    <div class="model-actions">
+                        <a href="#" class="btn-primary-premium" onclick="openWhatsApp('Dolphin Mini')">Cotizar</a>
+                        <a href="/vehiculo/dolphin-mini" class="btn-secondary-premium">Descubrir</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Song Plus -->
+            <div class="model-card">
+                <div class="model-image">
+                    <img src="/images/byd/byd-song-plus.webp" alt="BYD Song Plus">
+                </div>
+                <div class="model-info">
+                    <p class="model-category">SUV Hibrido</p>
+                    <h3 class="model-name">BYD Song Plus</h3>
+                    <p class="model-price">Desde <strong>$649,980 MXN</strong></p>
+                    <div class="model-features">
+                        <div class="feature">
+                            <div class="feature-value">1,100 km</div>
+                            <div class="feature-label">Autonomia</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">7.9s</div>
+                            <div class="feature-label">0-100</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-value">197 hp</div>
+                            <div class="feature-label">Potencia</div>
+                        </div>
+                    </div>
+                    <div class="model-actions">
+                        <a href="#" class="btn-primary-premium" onclick="openWhatsApp('Song Plus')">Cotizar</a>
+                        <a href="/vehiculo/song-plus" class="btn-secondary-premium">Descubrir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section" id="experiencia">
+        <div class="section-header">
+            <p class="section-label">Por que BYD</p>
+            <h2 class="section-title">La Experiencia Premium</h2>
+        </div>
+
+        <div class="experience-grid">
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4 class="experience-title">Garantia 6 Anos</h4>
+                <p class="experience-desc">Tranquilidad total con cobertura extendida en bateria y tren motriz.</p>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <i class="fas fa-charging-station"></i>
+                </div>
+                <h4 class="experience-title">Red de Carga</h4>
+                <p class="experience-desc">Acceso a la red de supercargadores BYD en todo Mexico.</p>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h4 class="experience-title">Financiamiento</h4>
+                <p class="experience-desc">Planes personalizados con tasas preferenciales desde 9.9% anual.</p>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h4 class="experience-title">Test Drive</h4>
+                <p class="experience-desc">Agenda tu prueba de manejo sin compromiso en nuestra agencia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-bg-image" style="background-image: url('/images/byd/byd-shark-new.webp');"></div>
+        <div class="cta-content">
+            <h2 class="cta-title">Tu Proximo Auto Te Espera</h2>
+            <p class="cta-subtitle">Agenda una cita personalizada y descubre por que miles de mexicanos ya eligieron BYD como su vehiculo del futuro.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn-cta-primary" onclick="openWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> Contactar Ahora
+                </a>
+                <a href="tel:+528120272752" class="btn-cta-secondary">
+                    <i class="fas fa-phone"></i> Llamar: 81 2027 2752
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advisor Section -->
+    <section class="advisor-section" id="asesora">
+        <div class="advisor-container">
+            <div class="advisor-image">
+                <img src="/images/byd/salma.jfif" alt="Salma - Asesora BYD">
+                <div class="advisor-badge">Certificada BYD</div>
+            </div>
+            <div class="advisor-info">
+                <h3>Salma Zapata</h3>
+                <p class="advisor-role">Tu Asesora Personal BYD</p>
+                <p class="advisor-bio">
+                    Con mas de 3 anos de experiencia en el sector automotriz electrico, estoy aqui para guiarte en cada paso de tu decision. Mi compromiso es brindarte una atencion personalizada y transparente, ayudandote a encontrar el vehiculo perfecto para tu estilo de vida.
+                </p>
+                <div class="advisor-contact">
+                    <a href="https://wa.me/528120272752?text=Hola%20Salma!%20Me%20interesa%20conocer%20mas%20sobre%20los%20vehiculos%20BYD." class="btn-cta-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:salma.zapata@cleber.com" class="btn-cta-secondary">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-premium">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="/images/byd/BYD-Logo.png" alt="BYD">
+            </div>
+            <ul class="footer-links">
+                <li><a href="#modelos">Modelos</a></li>
+                <li><a href="/calculatusahorros">Calculadora</a></li>
+                <li><a href="#asesora">Contacto</a></li>
+                <li><a href="/legal/privacidad">Privacidad</a></li>
+            </ul>
+            <p class="footer-copy">&copy; 2025 Salma - Asesora BYD Monterrey</p>
+        </div>
+    </footer>
+
+    <script>
+        // ========== CAROUSEL FUNCTIONALITY ==========
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const prevBtn = document.getElementById('prevSlide');
+        const nextBtn = document.getElementById('nextSlide');
+        const progressBar = document.getElementById('progressBar');
+
+        let currentSlide = 0;
+        let slideInterval;
+        let progressInterval;
+        const slideDuration = 6000; // 6 seconds per slide
+        const progressStep = 50; // Update progress every 50ms
+
+        function goToSlide(index) {
+            // Remove active class from current slide and dot
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+
+            // Update current slide index
+            currentSlide = index;
+            if (currentSlide >= slides.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+
+            // Add active class to new slide and dot
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+
+            // Reset progress bar
+            resetProgress();
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+
+        function resetProgress() {
+            // Clear existing intervals
+            clearInterval(progressInterval);
+
+            // Reset progress bar
+            let progress = 0;
+            progressBar.style.width = '0%';
+
+            // Start new progress animation
+            progressInterval = setInterval(() => {
+                progress += (progressStep / slideDuration) * 100;
+                progressBar.style.width = progress + '%';
+
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                }
+            }, progressStep);
+        }
+
+        function startAutoSlide() {
+            resetProgress();
+            slideInterval = setInterval(nextSlide, slideDuration);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(slideInterval);
+            clearInterval(progressInterval);
+        }
+
+        // Event Listeners
+        prevBtn.addEventListener('click', () => {
+            stopAutoSlide();
+            prevSlide();
+            startAutoSlide();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            stopAutoSlide();
+            nextSlide();
+            startAutoSlide();
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                stopAutoSlide();
+                goToSlide(index);
+                startAutoSlide();
+            });
+        });
+
+        // Pause on hover
+        const carousel = document.querySelector('.hero-carousel');
+        carousel.addEventListener('mouseenter', stopAutoSlide);
+        carousel.addEventListener('mouseleave', startAutoSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                stopAutoSlide();
+                prevSlide();
+                startAutoSlide();
+            } else if (e.key === 'ArrowRight') {
+                stopAutoSlide();
+                nextSlide();
+                startAutoSlide();
+            }
+        });
+
+        // Touch/Swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        carousel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                stopAutoSlide();
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                startAutoSlide();
+            }
+        }
+
+        // Start carousel
+        startAutoSlide();
+
+        // ========== NAVBAR SCROLL EFFECT ==========
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========== WHATSAPP FUNCTION ==========
+        function openWhatsApp(modelo = '') {
+            let mensaje = 'Hola Salma! Me interesa obtener informacion sobre los vehiculos BYD.';
+            if (modelo) {
+                mensaje = `Hola Salma! Me interesa obtener informacion sobre el BYD ${modelo}.`;
+            }
+            window.open(`https://wa.me/528120272752?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
+
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

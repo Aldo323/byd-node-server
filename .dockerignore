@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+.env
+.git
+.gitignore
+README.md
+.DS_Store
+.nyc_output
+coverage
+.vscode
+*.bat
+build-docker.bat
+start.bat
+start-port-3001.bat
+Dockerfile
+.dockerignore

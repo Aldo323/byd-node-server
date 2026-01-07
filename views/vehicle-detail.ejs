@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2H9XL972Q9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2H9XL972Q9');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= vehicle.displayName %> | BYD Monterrey - Salma Tu Asesora Personal</title>
+    <meta name="description" content="<%= vehicle.displayName %> disponible con Salma, tu asesora personal BYD en Monterrey. Conoce precios, caracteristicas y agenda tu prueba de manejo.">
+    <meta name="geo.region" content="MX-NLE">
+    <meta name="geo.placename" content="Monterrey, Nuevo Leon, Mexico">
+    <link rel="icon" type="image/png" href="/images/byd/bydicono.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/chat-widget.css">
+    <style>
+        /* Vehicle Detail Premium Styles */
+        .vehicle-hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--soft-black) 50%, var(--charcoal) 100%);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .vehicle-hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(214, 175, 55, 0.08) 0%, transparent 50%);
+        }
+
+        .vehicle-hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 4rem;
+            align-items: center;
+        }
+
+        .vehicle-info {
+            z-index: 2;
+        }
+
+        .vehicle-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: <%= vehicle.type === 'hybrid' ? 'linear-gradient(135deg, #d4af37, #b8962e)' : 'linear-gradient(135deg, #10b981, #059669)' %>;
+            color: <%= vehicle.type === 'hybrid' ? 'var(--primary-black)' : 'var(--pure-white)' %>;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .vehicle-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 200;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(180deg, var(--pure-white) 0%, var(--silver) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .vehicle-description {
+            font-size: 1.1rem;
+            color: var(--silver);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .vehicle-price {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .vehicle-hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+        }
+
+        .hero-stat-value {
+            font-size: 2rem;
+            font-weight: 200;
+            color: var(--pure-white);
+            line-height: 1;
+        }
+
+        .hero-stat-value span {
+            font-size: 0.9rem;
+            color: var(--silver);
+        }
+
+        .hero-stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-top: 0.5rem;
+        }
+
+        .vehicle-cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .vehicle-image-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .vehicle-main-image {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
+            animation: float-subtle 6s ease-in-out infinite;
+        }
+
+        /* Specs Section */
+        .specs-section {
+            padding: 6rem 4rem;
+            background: var(--primary-black);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .spec-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .spec-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .spec-card-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .spec-card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .spec-card-icon.motor { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; }
+        .spec-card-icon.battery { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+        .spec-card-icon.performance { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
+        .spec-card-icon.dimensions { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; }
+        .spec-card-icon.safety { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
+        .spec-card-icon.comfort { background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; }
+
+        .spec-card-title {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--pure-white);
+            margin: 0;
+        }
+
+        .spec-card-subtitle {
+            font-size: 0.75rem;
+            color: var(--silver);
+            margin-top: 0.25rem;
+        }
+
+        .spec-card-body {
+            padding: 1.5rem 2rem;
+        }
+
+        .spec-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .spec-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .spec-item-value {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--pure-white);
+            line-height: 1.2;
+        }
+
+        .spec-item-value small {
+            font-size: 0.75rem;
+            color: var(--silver);
+        }
+
+        .spec-item-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-top: 0.5rem;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 6rem 4rem;
+            background: linear-gradient(180deg, var(--primary-black) 0%, var(--soft-black) 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            transition: var(--transition-smooth);
+        }
+
+        .feature-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateX(5px);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+            color: var(--silver);
+            line-height: 1.5;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 6rem 4rem;
+            background: var(--primary-black);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 4rem;
+            background: var(--soft-black);
+        }
+
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            padding: 2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h4 {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--pure-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            font-size: 0.85rem;
+            color: var(--silver);
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .vehicle-hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 0 2rem;
+            }
+
+            .vehicle-hero-stats {
+                justify-content: center;
+            }
+
+            .vehicle-cta-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .vehicle-image-container {
+                order: -1;
+            }
+
+            .vehicle-main-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .specs-section,
+            .features-section,
+            .gallery-section,
+            .contact-section {
+                padding: 4rem 2rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .advisor-image {
+                max-width: 250px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .vehicle-hero {
+                padding-top: 60px;
+            }
+
+            .vehicle-hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.75rem;
+            }
+
+            .hero-stat {
+                padding: 1rem 0.5rem;
+            }
+
+            .hero-stat-value {
+                font-size: 1.3rem;
+            }
+
+            .hero-stat-label {
+                font-size: 0.6rem;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .spec-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-cards {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vehicle-title {
+                font-size: 2rem;
+            }
+
+            .vehicle-hero-stats {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+
+            .hero-stat-value {
+                font-size: 1.1rem;
+            }
+
+            .spec-item-value {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Premium Navigation -->
+    <nav class="nav-premium" id="navbar">
+        <div class="nav-logo">
+            <a href="/">
+                <img src="/images/byd/BYD-Logo.png" alt="BYD">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/#modelos">Modelos</a></li>
+            <li><a href="/#experiencia">Experiencia</a></li>
+            <li><a href="/#asesora">Tu Asesora</a></li>
+            <li><a href="/calculatusahorros">Calculadora</a></li>
+        </ul>
+        <button class="nav-cta" onclick="openWhatsApp('<%= vehicle.name %>')">Cotizar Ahora</button>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <!-- Vehicle Hero Section -->
+    <section class="vehicle-hero">
+        <div class="vehicle-hero-bg"></div>
+        <div class="vehicle-hero-content">
+            <div class="vehicle-info">
+                <span class="vehicle-badge">
+                    <i class="fas fa-<%= vehicle.type === 'hybrid' ? 'leaf' : 'bolt' %> me-2"></i>
+                    <%= vehicle.type === 'hybrid' ? 'Hibrido Enchufable' : '100% Electrico' %>
+                </span>
+                <h1 class="vehicle-title"><%= vehicle.displayName %></h1>
+                <p class="vehicle-description"><%= vehicle.description %></p>
+                <p class="vehicle-price"><%= vehicle.price %></p>
+
+                <div class="vehicle-hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value"><%= vehicle.range %><span>km</span></div>
+                        <div class="hero-stat-label">Autonomia</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value"><%= vehicle.power.hp %><span>hp</span></div>
+                        <div class="hero-stat-label">Potencia</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value"><%= vehicle.acceleration.split(' ')[0] %></div>
+                        <div class="hero-stat-label">0-100 km/h</div>
+                    </div>
+                </div>
+
+                <div class="vehicle-cta-buttons">
+                    <a href="#" class="btn-cta-primary" onclick="openWhatsApp('<%= vehicle.name %>')">
+                        <i class="fab fa-whatsapp"></i> Cotizar
+                    </a>
+                    <a href="tel:+528120272752" class="btn-cta-secondary">
+                        <i class="fas fa-phone"></i> Llamar
+                    </a>
+                </div>
+            </div>
+
+            <div class="vehicle-image-container">
+                <img src="<%= vehicle.image %>" alt="<%= vehicle.displayName %>" class="vehicle-main-image">
+            </div>
+        </div>
+    </section>
+
+    <% if (vehicle.gallery && vehicle.gallery.length > 0) { %>
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="section-header">
+            <p class="section-label">Galeria</p>
+            <h2 class="section-title">Conoce Cada Detalle</h2>
+        </div>
+        <div class="gallery-grid">
+            <% vehicle.gallery.forEach((image, index) => { %>
+            <div class="gallery-item" onclick="openGallery(<%= index %>)">
+                <img src="<%= image %>" alt="<%= vehicle.displayName %> - Vista <%= index + 1 %>" loading="lazy">
+            </div>
+            <% }); %>
+        </div>
+    </section>
+    <% } %>
+
+    <!-- Specifications Section -->
+    <section class="specs-section">
+        <div class="section-header">
+            <p class="section-label">Especificaciones</p>
+            <h2 class="section-title">Tecnologia de Vanguardia</h2>
+        </div>
+
+        <div class="specs-grid">
+            <!-- Motor Card -->
+            <div class="spec-card">
+                <div class="spec-card-header">
+                    <div class="spec-card-icon motor">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h3 class="spec-card-title">Sistema de Propulsion</h3>
+                        <p class="spec-card-subtitle">Motor <%= vehicle.type === 'hybrid' ? 'Hibrido' : 'Electrico' %></p>
+                    </div>
+                </div>
+                <div class="spec-card-body">
+                    <div class="spec-items">
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.power.kw %><small>kW</small></div>
+                            <div class="spec-item-label">Potencia</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.power.hp %><small>HP</small></div>
+                            <div class="spec-item-label">Caballos</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.torque %><small>Nm</small></div>
+                            <div class="spec-item-label">Torque</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.maxSpeed %><small>km/h</small></div>
+                            <div class="spec-item-label">Vel. Max</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Battery Card -->
+            <div class="spec-card">
+                <div class="spec-card-header">
+                    <div class="spec-card-icon battery">
+                        <i class="fas fa-<%= vehicle.type === 'hybrid' ? 'gas-pump' : 'battery-full' %>"></i>
+                    </div>
+                    <div>
+                        <h3 class="spec-card-title"><%= vehicle.type === 'hybrid' ? 'Energia y Combustible' : 'Bateria y Carga' %></h3>
+                        <p class="spec-card-subtitle">Tecnologia Blade</p>
+                    </div>
+                </div>
+                <div class="spec-card-body">
+                    <div class="spec-items">
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.batteryCapacity %><small>kWh</small></div>
+                            <div class="spec-item-label">Bateria</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.range %><small>km</small></div>
+                            <div class="spec-item-label">Autonomia</div>
+                        </div>
+                        <% if (vehicle.type === 'hybrid' && vehicle.fuelTankCapacity) { %>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.fuelTankCapacity %><small>L</small></div>
+                            <div class="spec-item-label">Tanque</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.electricRange %><small>km</small></div>
+                            <div class="spec-item-label">Rango EV</div>
+                        </div>
+                        <% } else { %>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.chargingAC %><small>kW</small></div>
+                            <div class="spec-item-label">Carga AC</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.chargingDC || 'N/A' %><small>kW</small></div>
+                            <div class="spec-item-label">Carga DC</div>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Card -->
+            <div class="spec-card">
+                <div class="spec-card-header">
+                    <div class="spec-card-icon performance">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="spec-card-title">Rendimiento</h3>
+                        <p class="spec-card-subtitle">Eficiencia Maxima</p>
+                    </div>
+                </div>
+                <div class="spec-card-body">
+                    <div class="spec-items">
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.consumption %><small><%= vehicle.type === 'hybrid' ? 'L' : 'kWh' %></small></div>
+                            <div class="spec-item-label">Consumo/100km</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.acceleration.split(' ')[0] %></div>
+                            <div class="spec-item-label">0-100 km/h</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.seats %></div>
+                            <div class="spec-item-label">Pasajeros</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.cargoVolume || 'N/A' %><small>L</small></div>
+                            <div class="spec-item-label">Cajuela</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dimensions Card -->
+            <div class="spec-card">
+                <div class="spec-card-header">
+                    <div class="spec-card-icon dimensions">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <div>
+                        <h3 class="spec-card-title">Dimensiones</h3>
+                        <p class="spec-card-subtitle">Medidas Exteriores</p>
+                    </div>
+                </div>
+                <div class="spec-card-body">
+                    <div class="spec-items">
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.dimensions.length %><small>mm</small></div>
+                            <div class="spec-item-label">Largo</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.dimensions.width %><small>mm</small></div>
+                            <div class="spec-item-label">Ancho</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.dimensions.height %><small>mm</small></div>
+                            <div class="spec-item-label">Alto</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-item-value"><%= vehicle.dimensions.wheelbase %><small>mm</small></div>
+                            <div class="spec-item-label">Distancia Ejes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <p class="section-label">Caracteristicas</p>
+            <h2 class="section-title">Equipamiento Premium</h2>
+        </div>
+
+        <div class="features-grid">
+            <% if (vehicle.features) { %>
+                <% vehicle.features.forEach(feature => { %>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span class="feature-text"><%= feature %></span>
+                </div>
+                <% }); %>
+            <% } %>
+
+            <% if (vehicle.safetyFeatures) { %>
+                <% vehicle.safetyFeatures.forEach(feature => { %>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <span class="feature-text"><%= feature %></span>
+                </div>
+                <% }); %>
+            <% } %>
+
+            <% if (vehicle.comfort) { %>
+                <% vehicle.comfort.forEach(feature => { %>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <span class="feature-text"><%= feature %></span>
+                </div>
+                <% }); %>
+            <% } %>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contacto">
+        <div class="contact-container">
+            <div class="advisor-image">
+                <img src="/images/byd/salma.jfif" alt="Salma - Asesora BYD" style="width: 100%; border-radius: 16px;">
+                <div class="advisor-badge">Certificada BYD</div>
+            </div>
+            <div class="advisor-info">
+                <h3>Salma Zapata</h3>
+                <p class="advisor-role">Tu Asesora Personal BYD</p>
+                <p class="advisor-bio">
+                    Estoy aqui para ayudarte a conocer todo sobre el <%= vehicle.displayName %>.
+                    Agenda tu prueba de manejo sin compromiso y descubre por que BYD es la mejor opcion.
+                </p>
+                <div class="contact-cards" style="flex-direction: row; flex-wrap: wrap;">
+                    <a href="https://wa.me/528120272752?text=Hola%20Salma!%20Me%20interesa%20el%20<%= encodeURIComponent(vehicle.displayName) %>" class="contact-card" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        <h4>WhatsApp</h4>
+                        <p>Respuesta inmediata</p>
+                    </a>
+                    <a href="tel:+528120272752" class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <h4>Llamar</h4>
+                        <p>81 2027 2752</p>
+                    </a>
+                    <a href="mailto:salma.zapata@cleber.com" class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p>Cotizacion formal</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-bg-image" style="background-image: url('<%= vehicle.image %>');"></div>
+        <div class="cta-content">
+            <h2 class="cta-title">Agenda Tu Prueba de Manejo</h2>
+            <p class="cta-subtitle">Experimenta el <%= vehicle.displayName %> y descubre la tecnologia BYD en persona.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn-cta-primary" onclick="openWhatsApp('<%= vehicle.name %>')">
+                    <i class="fab fa-whatsapp"></i> Agendar Cita
+                </a>
+                <a href="/" class="btn-cta-secondary">
+                    <i class="fas fa-car"></i> Ver Otros Modelos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Premium -->
+    <footer class="footer-premium">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="/images/byd/BYD-Logo.png" alt="BYD">
+            </div>
+            <ul class="footer-links">
+                <li><a href="/#modelos">Modelos</a></li>
+                <li><a href="/calculatusahorros">Calculadora</a></li>
+                <li><a href="/#asesora">Contacto</a></li>
+                <li><a href="/legal/privacidad">Privacidad</a></li>
+            </ul>
+            <p class="footer-copy">&copy; 2025 Salma - Asesora BYD Monterrey</p>
+        </div>
+    </footer>
+
+    <% if (vehicle.gallery && vehicle.gallery.length > 0) { %>
+    <!-- Gallery Modal -->
+    <div id="galleryModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center;">
+        <button onclick="closeGallery()" style="position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: white; font-size: 2rem; cursor: pointer;">
+            <i class="fas fa-times"></i>
+        </button>
+        <button onclick="prevImage()" style="position: absolute; left: 2rem; background: rgba(255,255,255,0.1); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer;">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <img id="modalImage" src="" alt="" style="max-width: 90%; max-height: 90%; object-fit: contain;">
+        <button onclick="nextImage()" style="position: absolute; right: 2rem; background: rgba(255,255,255,0.1); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer;">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+    <% } %>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // WhatsApp function
+        function openWhatsApp(modelo = '') {
+            let mensaje = 'Hola Salma! Me interesa obtener informacion sobre el <%= vehicle.displayName %>.';
+            if (modelo) {
+                mensaje = `Hola Salma! Me interesa obtener informacion sobre el BYD ${modelo}.`;
+            }
+            window.open(`https://wa.me/528120272752?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
+
+        <% if (vehicle.gallery && vehicle.gallery.length > 0) { %>
+        // Gallery functionality
+        const galleryImages = <%- JSON.stringify(vehicle.gallery) %>;
+        let currentImageIndex = 0;
+
+        function openGallery(index) {
+            currentImageIndex = index;
+            document.getElementById('modalImage').src = galleryImages[index];
+            document.getElementById('galleryModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            document.getElementById('modalImage').src = galleryImages[currentImageIndex];
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            document.getElementById('modalImage').src = galleryImages[currentImageIndex];
+        }
+
+        // Close modal with escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeGallery();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        });
+        <% } %>
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+    <!-- Chat Widget Salma AI -->
+    <script src="/js/chat-widget.js" defer></script>
+</body>
+</html>
