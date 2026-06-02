@@ -258,6 +258,14 @@ console.log('Tokens usados:', response.tokensUsed);
 ### Problema: Leads no se guardan
 **Solución**: Verificar que la tabla `leads` exista y tenga la estructura correcta
 
+### Problema: "Connection terminated due to connection timeout"
+**Causa**: El contenedor no está en la red `unified_network`
+**Solución**:
+```bash
+docker network connect unified_network byd_landing_server
+docker restart byd_landing_server
+```
+
 ## 📞 Soporte
 
 Para problemas técnicos o mejoras:
@@ -265,6 +273,69 @@ Para problemas técnicos o mejoras:
 2. Ejecutar `node test_chatbot.js` para diagnóstico
 3. Verificar configuración de base de datos
 4. Comprobar variables de entorno
+
+---
+
+## 📝 ACTUALIZACIÓN v2.0 - Formulario HTML (Enero 2026)
+
+### Problema Detectado
+La extracción de datos por regex era poco confiable. Si el usuario escribía solo "Rene Gul" sin decir "me llamo Rene Gul", el sistema no lo detectaba.
+
+### Solución Implementada: Formulario Inline
+
+Después de **2 mensajes del usuario**, aparece un formulario HTML con campos para:
+- Nombre completo
+- Teléfono (10 dígitos)
+
+### Nuevo Endpoint
+
+```javascript
+POST /api/chatbot/lead-form
+{
+    "name": "Juan Pérez",
+    "phone": "8112345678",
+    "conversationId": "uuid",
+    "sessionId": "session_xxx"
+}
+```
+
+Los leads guardados con este método tienen `source='chatbot_form'`.
+
+### Archivos Modificados
+
+| Archivo | Cambio |
+|---------|--------|
+| `docker-compose.yml` | Agregada red `unified_network` |
+| `server.js` | Nuevo endpoint `/api/chatbot/lead-form` |
+| `public/js/chat-widget.js` | Formulario inline v2.0 |
+
+### Configuración de Red Docker
+
+**CRÍTICO**: El contenedor debe estar en `unified_network` para conectar con PostgreSQL.
+
+```yaml
+# docker-compose.yml
+networks:
+  unified_network:
+    external: true
+    name: unified_network
+```
+
+### Comandos de Verificación
+
+```bash
+# Ver si está en la red correcta
+docker inspect byd_landing_server --format '{{range $k, $v := .NetworkSettings.Networks}}{{$k}} {{end}}'
+
+# Verificar conexión a BD
+docker exec byd_landing_server ping -c 2 postgres_byd
+
+# Ver leads recientes
+docker exec postgres_byd psql -U postgres -d byd_calculator_db \
+  -c "SELECT name, phone, source, created_at FROM leads ORDER BY created_at DESC LIMIT 10;"
+```
+
+---
 
 ## 🎉 ¡Listo para Producción!
 
@@ -277,3 +348,4 @@ El sistema está completamente implementado y listo para manejar conversaciones 
 - 📊 Analytics detallados
 - 🔄 Captura inteligente de leads
 - 🤖 IA avanzada cuando es necesaria
+- 📝 Formulario HTML para captura 100% confiable (v2.0)

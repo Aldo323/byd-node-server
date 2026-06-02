@@ -1,0 +1,49 @@
+<%- include('../partials/admin-shell', { title: 'Login' }) %>
+<div class="login-wrap">
+    <div class="login-card">
+        <div class="logo">
+            <img src="/images/byd/BYD-Logo.png" alt="BYD">
+            <h1>Panel Admin Salma</h1>
+            <p>Acceso solo por SMS</p>
+        </div>
+
+        <% if (error) { %>
+            <div class="alert error"><i class="fas fa-circle-exclamation"></i> <%= error %></div>
+        <% } %>
+        <% if (message) { %>
+            <div class="alert success"><i class="fas fa-check-circle"></i> <%= message %></div>
+        <% } %>
+
+        <% if (step === 'request') { %>
+            <form action="/admin/login/request" method="POST">
+                <div class="field">
+                    <label>Teléfono autorizado</label>
+                    <input type="tel" name="phone" value="+528120272752" placeholder="+52..." readonly style="background: var(--bg);">
+                    <div class="help">Te enviaremos un código de 6 dígitos por SMS al teléfono <%= phoneHint %></div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+                    <i class="fas fa-paper-plane"></i> Enviarme código
+                </button>
+            </form>
+        <% } else { %>
+            <form action="/admin/login/verify" method="POST">
+                <div class="field">
+                    <label>Código recibido por SMS</label>
+                    <input type="text" name="code" class="otp-input" maxlength="6" pattern="[0-9]{6}" inputmode="numeric" autofocus required>
+                    <div class="help">Enviado a <%= phoneHint %> · vence en 10 minutos</div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+                    <i class="fas fa-right-to-bracket"></i> Entrar
+                </button>
+                <p style="text-align:center; margin-top: 1rem; font-size: 0.85rem;">
+                    <a href="/admin/login">Pedir otro código</a>
+                </p>
+            </form>
+        <% } %>
+
+        <p style="text-align:center; margin-top: 2rem; font-size: 0.85rem; color: var(--muted);">
+            <a href="/" style="color: var(--muted);"><i class="fas fa-arrow-left"></i> Volver al sitio</a>
+        </p>
+    </div>
+</div>
+</body></html>

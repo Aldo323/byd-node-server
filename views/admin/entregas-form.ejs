@@ -1,0 +1,80 @@
+<%- include('../partials/admin-shell', { title: entrega ? 'Editar entrega' : 'Nueva entrega' }) %>
+<%- include('../partials/admin-sidebar', { active: 'entregas', pageTitle: entrega ? 'Editar entrega' : 'Nueva entrega' }) %>
+
+<% if (error) { %><div class="alert error"><i class="fas fa-circle-exclamation"></i> <%= error %></div><% } %>
+
+<div class="card">
+    <div class="card-body">
+        <form action="/admin/entregas/guardar" method="POST" enctype="multipart/form-data">
+            <% if (entrega && entrega.id) { %>
+                <input type="hidden" name="id" value="<%= entrega.id %>">
+                <input type="hidden" name="foto_principal_existente" value="<%= entrega.foto_principal %>">
+                <input type="hidden" name="foto_thumbnail_existente" value="<%= entrega.foto_thumbnail %>">
+            <% } %>
+
+            <div class="form-row">
+                <div class="field">
+                    <label>Cliente *</label>
+                    <input type="text" name="cliente_nombre" required maxlength="150" value="<%= entrega?.cliente_nombre || '' %>">
+                </div>
+                <div class="field">
+                    <label>Ciudad</label>
+                    <input type="text" name="cliente_ciudad" maxlength="100" value="<%= entrega?.cliente_ciudad || '' %>" placeholder="Monterrey, N.L.">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label>Modelo BYD *</label>
+                    <select name="modelo" required>
+                        <% const modelos = ['King DM-i','Shark DM-i','Seal','Sea Lion 7','Dolphin Mini','Song Plus','Yuan Pro','Han','Tang']; %>
+                        <option value="">— Selecciona —</option>
+                        <% modelos.forEach(function(m){ %>
+                            <option value="<%= m %>" <%= entrega?.modelo === m ? 'selected' : '' %>><%= m %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Color</label>
+                    <input type="text" name="color" maxlength="50" value="<%= entrega?.color || '' %>" placeholder="Blanco, Azul, etc.">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label>Fecha de entrega</label>
+                    <input type="date" name="fecha_entrega" value="<%= entrega?.fecha_entrega ? new Date(entrega.fecha_entrega).toISOString().substring(0,10) : new Date().toISOString().substring(0,10) %>">
+                </div>
+                <div class="field">
+                    <label>Foto principal <%= entrega?.foto_principal ? '(opcional - reemplaza)' : '*' %></label>
+                    <input type="file" name="foto" accept="image/*" <%= entrega?.foto_principal ? '' : 'required' %>>
+                    <% if (entrega?.foto_thumbnail) { %>
+                        <div class="help"><img src="<%= entrega.foto_thumbnail %>" alt="" style="margin-top:0.5rem; max-width:120px; border-radius:8px;"></div>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="field" style="margin-bottom: 1rem;">
+                <label>Descripción / testimonio breve</label>
+                <textarea name="descripcion" maxlength="1000" placeholder="Una nota corta sobre la entrega o frase del cliente..."><%= entrega?.descripcion || '' %></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="field checkbox-row">
+                    <input type="checkbox" id="publicada" name="publicada" value="1" <%= (entrega?.publicada !== false) ? 'checked' : '' %>>
+                    <label for="publicada" style="margin: 0;">Publicada en sitio</label>
+                </div>
+                <div class="field checkbox-row">
+                    <input type="checkbox" id="destacada" name="destacada" value="1" <%= entrega?.destacada ? 'checked' : '' %>>
+                    <label for="destacada" style="margin: 0;">★ Destacada (aparece primero)</label>
+                </div>
+            </div>
+
+            <div style="display:flex; gap: 0.75rem; margin-top: 1.5rem;">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+                <a href="/admin/entregas" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</main></div></body></html>

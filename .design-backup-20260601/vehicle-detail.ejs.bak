@@ -316,11 +316,6 @@
             cursor: pointer;
         }
 
-        .gallery-item:focus-visible {
-            outline: 2px solid var(--accent-gold);
-            outline-offset: 3px;
-        }
-
         .gallery-item img {
             width: 100%;
             height: 100%;
@@ -506,7 +501,6 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="/css/ds.css?v=1">
 </head>
 <body>
     <!-- Premium Navigation -->
@@ -579,7 +573,7 @@
         </div>
         <div class="gallery-grid">
             <% vehicle.gallery.forEach((image, index) => { %>
-            <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen <%= index + 1 %> de <%= vehicle.displayName %>" onclick="openGallery(<%= index %>)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openGallery(<%= index %>)}">
+            <div class="gallery-item" onclick="openGallery(<%= index %>)">
                 <img src="<%= image %>" alt="<%= vehicle.displayName %> - Vista <%= index + 1 %>" loading="lazy">
             </div>
             <% }); %>
@@ -937,7 +931,6 @@
         });
     </script>
     <!-- Chat Widget Salma AI -->
-    <script src="/js/motion.js?v=1" defer></script>
     <script src="/js/chat-widget.js?v=2.0.1" defer></script>
 </body>
 </html>

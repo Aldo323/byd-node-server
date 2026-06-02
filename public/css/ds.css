@@ -1,0 +1,200 @@
+/* =============================================================
+   BYD Salma · Design System  ("ds.css")
+   Capa de gusto y refinamiento — estilo Emil Kowalski.
+   Se carga DESPUÉS de los estilos inline de cada vista, así que
+   redefine los tokens :root (cascadean a todo el sitio) y refina
+   los componentes compartidos (nav, botones, cards, secciones).
+   Aditivo y de bajo riesgo: no toca la lógica ni los bindings.
+   ============================================================= */
+
+:root {
+    /* — Marca, afinada — */
+    --green:        #059669;
+    --green-dark:   #047857;
+    --green-darker: #064e3b;
+    --green-soft:   #d1fae5;
+    --green-mint:   #ecfdf5;
+    --green-accent: #10b981;   /* highlight más vivo para acentos */
+
+    /* — Tinta y neutros (ramp más rica) — */
+    --ink:    #0b1220;
+    --ink-2:  #1e293b;
+    --muted:  #5b6b82;
+    --muted-2:#93a2b8;
+    --line:   #e8edf3;
+    --line-2: #eef2f7;
+    --bg:     #f7f9fc;
+    --white:  #ffffff;
+
+    /* — Elevación: sombras suaves, en capas, con tinte ambiental — */
+    --shadow-xs: 0 1px 2px rgba(11,18,32,.05);
+    --shadow-sm: 0 1px 2px rgba(11,18,32,.05), 0 2px 6px rgba(11,18,32,.04);
+    --shadow:    0 4px 12px -2px rgba(11,18,32,.08), 0 2px 6px -2px rgba(11,18,32,.05);
+    --shadow-lg: 0 24px 48px -12px rgba(11,18,32,.18), 0 8px 20px -8px rgba(11,18,32,.10);
+    --shadow-green: 0 12px 28px -8px rgba(5,150,105,.45);
+
+    /* — Radios — */
+    --r-sm: 10px;
+    --r:    14px;
+    --r-lg: 20px;
+    --r-xl: 28px;
+
+    /* — Movimiento: curvas con carácter (spring/standard) — */
+    --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+    --ease-out:    cubic-bezier(.22, 1, .36, 1);
+    --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+    --dur-1: .14s;
+    --dur-2: .28s;
+    --dur-3: .5s;
+
+    /* — Anillo de foco accesible — */
+    --ring: 0 0 0 3px rgba(5,150,105,.18);
+}
+
+/* — Tipografía: óptica fina, kerning, numerales tabulares contextuales — */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "cv02","cv03","cv04","cv11", "ss01";
+    letter-spacing: -0.011em;
+}
+.tabular, .num, .big, .amount, .calc-result-main { font-variant-numeric: tabular-nums; }
+
+/* Display headings: tracking negativo y balance de línea */
+h1, h2, .hero h1, .section h2 { text-wrap: balance; }
+.hero h1 { letter-spacing: -0.035em !important; line-height: 1.02 !important; }
+.section h2 { letter-spacing: -0.03em !important; }
+
+/* Foco visible y elegante en todo el sitio */
+a:focus-visible, button:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+    border-radius: 8px;
+}
+
+/* Selección con color de marca */
+::selection { background: rgba(5,150,105,.18); color: var(--green-darker); }
+
+/* =================== NAV: pill flotante ==================== */
+.nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,.72) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    backdrop-filter: saturate(180%) blur(16px);
+    border-bottom: 1px solid rgba(232,237,243,.8) !important;
+    transition: box-shadow var(--dur-2) var(--ease-out), background var(--dur-2);
+}
+.nav.is-stuck { box-shadow: 0 10px 30px -16px rgba(11,18,32,.25); }
+.nav-logo { letter-spacing: -0.02em; }
+.nav-logo .tag, .nav-logo .ahorro-tag {
+    background: var(--green); color: #fff;
+    padding: .2rem .55rem; border-radius: 999px;
+    font-size: .68rem; letter-spacing: .08em; font-weight: 700;
+    box-shadow: var(--shadow-green);
+}
+.nav-links a {
+    position: relative; transition: color var(--dur-1) var(--ease-out);
+}
+.nav-links a::after {
+    content: ""; position: absolute; left: 0; right: 100%; bottom: -6px;
+    height: 2px; border-radius: 2px; background: var(--green);
+    transition: right var(--dur-2) var(--ease-out);
+}
+.nav-links a:hover::after, .nav-links a.active::after { right: 0; }
+
+/* =================== BOTONES ==================== */
+.btn-wa, .calc-actions a, .cta-buttons a, .btn {
+    transition: transform var(--dur-1) var(--ease-spring),
+                box-shadow var(--dur-2) var(--ease-out),
+                background var(--dur-2), filter var(--dur-2);
+    will-change: transform;
+}
+.btn-wa {
+    background: linear-gradient(180deg, var(--green-accent), var(--green)) !important;
+    border-radius: 12px !important;
+    box-shadow: var(--shadow-green);
+    letter-spacing: -0.01em;
+}
+.btn-wa:hover { transform: translateY(-1px); box-shadow: 0 16px 30px -10px rgba(5,150,105,.5) !important; filter: saturate(1.05); }
+.btn-wa:active { transform: translateY(0) scale(.98); }
+.calc-actions a:active, .cta-buttons a:active { transform: translateY(0) scale(.985); }
+.calc-actions .primary { background: linear-gradient(180deg, var(--green-accent), var(--green)) !important; box-shadow: var(--shadow-green); }
+
+/* =================== CARDS: elevación + hover refinado ==================== */
+.reason, .case-card, .model-pill, .faq-item, .calc-card {
+    transition: transform var(--dur-2) var(--ease-out),
+                box-shadow var(--dur-2) var(--ease-out),
+                border-color var(--dur-2) var(--ease-out);
+}
+.reason { border-radius: var(--r-lg) !important; }
+.reason:hover, .model-pill:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg) !important;
+    border-color: rgba(5,150,105,.4) !important;
+}
+.reason-icon {
+    background: linear-gradient(135deg, var(--green-mint), #fff) !important;
+    box-shadow: inset 0 0 0 1px rgba(5,150,105,.12), var(--shadow-xs);
+    transition: transform var(--dur-2) var(--ease-spring);
+}
+.reason:hover .reason-icon { transform: scale(1.08) rotate(-3deg); }
+.calc-card { border-radius: var(--r-xl) !important; box-shadow: var(--shadow-lg) !important; }
+
+/* Inputs/selects: foco con anillo de marca */
+.calc-field-wrap { transition: border-color var(--dur-1), box-shadow var(--dur-2) var(--ease-out); }
+.calc-field-wrap:focus-within { border-color: var(--green) !important; box-shadow: var(--ring) !important; }
+
+/* Eyebrow refinada */
+.eyebrow, .hero-eyebrow {
+    font-feature-settings: "ss01";
+}
+.hero-eyebrow {
+    background: rgba(255,255,255,.7) !important;
+    border: 1px solid rgba(5,150,105,.2);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-xs);
+}
+
+/* Píldoras de modelo: tipo más limpio */
+.model-pill .ty.electric { background: #e0edff !important; color: #1d4ed8 !important; }
+.model-pill .ty.hybrid   { background: #fef3c7 !important; color: #92400e !important; }
+
+/* =================== SCROLL REVEAL ==================== */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+}
+[data-reveal].is-in { opacity: 1; transform: none; }
+
+/* =================== TOAST (estilo Sonner) ==================== */
+#ds-toaster {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);
+    z-index: 9999; display: flex; flex-direction: column; gap: .5rem;
+    pointer-events: none;
+}
+.ds-toast {
+    pointer-events: auto;
+    display: flex; align-items: center; gap: .6rem;
+    background: rgba(11,18,32,.92); color: #fff;
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    padding: .8rem 1.1rem; border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    font-size: .92rem; font-weight: 500; letter-spacing: -0.01em;
+    border: 1px solid rgba(255,255,255,.08);
+    opacity: 0; transform: translateY(12px) scale(.96);
+    transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-spring);
+    max-width: 92vw;
+}
+.ds-toast.is-in { opacity: 1; transform: none; }
+.ds-toast i { color: var(--green-accent); }
+
+/* =================== ACCESIBILIDAD: reduce motion ==================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+    [data-reveal] { opacity: 1 !important; transform: none !important; }
+}

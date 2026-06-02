@@ -1,0 +1,83 @@
+<%- include('../partials/admin-shell', { title: promo ? 'Editar promoción' : 'Nueva promoción' }) %>
+<%- include('../partials/admin-sidebar', { active: 'promociones', pageTitle: promo ? 'Editar promoción' : 'Nueva promoción' }) %>
+
+<% if (error) { %><div class="alert error"><i class="fas fa-circle-exclamation"></i> <%= error %></div><% } %>
+
+<div class="card">
+    <div class="card-body">
+        <form action="/admin/promociones/guardar" method="POST" enctype="multipart/form-data">
+            <% if (promo && promo.id) { %>
+                <input type="hidden" name="id" value="<%= promo.id %>">
+                <% if (promo.imagen) { %><input type="hidden" name="imagen_existente" value="<%= promo.imagen %>"><% } %>
+            <% } %>
+
+            <div class="field" style="margin-bottom: 1rem;">
+                <label>Título *</label>
+                <input type="text" name="titulo" required maxlength="180" value="<%= promo?.titulo || '' %>">
+            </div>
+
+            <div class="field" style="margin-bottom: 1rem;">
+                <label>Subtítulo</label>
+                <input type="text" name="subtitulo" maxlength="220" value="<%= promo?.subtitulo || '' %>">
+            </div>
+
+            <div class="field" style="margin-bottom: 1rem;">
+                <label>Descripción</label>
+                <textarea name="descripcion" maxlength="1500"><%= promo?.descripcion || '' %></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label>Texto del botón (CTA)</label>
+                    <input type="text" name="cta_texto" maxlength="60" value="<%= promo?.cta_texto || 'Más información' %>">
+                </div>
+                <div class="field">
+                    <label>URL del botón</label>
+                    <input type="url" name="cta_url" maxlength="300" value="<%= promo?.cta_url || '' %>" placeholder="https://...">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label>Color de acento</label>
+                    <input type="color" name="color_acento" value="<%= promo?.color_acento || '#059669' %>">
+                </div>
+                <div class="field">
+                    <label>Imagen <%= promo?.imagen ? '(reemplaza)' : '' %></label>
+                    <input type="file" name="imagen" accept="image/*">
+                    <% if (promo?.imagen) { %>
+                        <div class="help"><img src="<%= promo.imagen %>" alt="" style="margin-top:0.5rem; max-width:200px; border-radius:8px;"></div>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label>Vigente desde</label>
+                    <input type="date" name="vigente_desde" value="<%= promo?.vigente_desde ? new Date(promo.vigente_desde).toISOString().substring(0,10) : new Date().toISOString().substring(0,10) %>">
+                </div>
+                <div class="field">
+                    <label>Vigente hasta</label>
+                    <input type="date" name="vigente_hasta" value="<%= promo?.vigente_hasta ? new Date(promo.vigente_hasta).toISOString().substring(0,10) : '' %>">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label>Orden (menor = primero)</label>
+                    <input type="number" name="orden" value="<%= promo?.orden || 0 %>">
+                </div>
+                <div class="field checkbox-row" style="margin-top: 1.7rem;">
+                    <input type="checkbox" id="activa" name="activa" value="1" <%= (promo?.activa !== false) ? 'checked' : '' %>>
+                    <label for="activa" style="margin: 0;">Activa</label>
+                </div>
+            </div>
+
+            <div style="display:flex; gap: 0.75rem; margin-top: 1.5rem;">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+                <a href="/admin/promociones" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</main></div></body></html>

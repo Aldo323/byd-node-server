@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title || 'Admin' %> · BYD Salma</title>
+    <link rel="icon" type="image/png" href="/images/byd/bydicono.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --green: #059669; --green-dark: #047857; --green-darker: #064e3b;
+            --green-soft: #d1fae5; --green-mint: #ecfdf5;
+            --blue: #0284c7; --red: #dc2626; --amber: #f59e0b;
+            --ink: #0f172a; --ink-2: #1e293b; --muted: #64748b;
+            --line: #e2e8f0; --bg: #f8fafc; --white: #fff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+        a { color: var(--green); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* ===== ADMIN SHELL ===== */
+        .admin-layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+        .admin-side {
+            background: var(--ink);
+            color: white;
+            padding: 1.5rem 1rem;
+            position: sticky; top: 0; height: 100vh; overflow-y: auto;
+        }
+        .admin-side .brand { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 2rem; padding: 0 0.5rem; }
+        .admin-side .brand img { height: 30px; filter: brightness(0) invert(1); }
+        .admin-side .brand span { font-weight: 800; font-size: 1.05rem; }
+        .admin-side nav a {
+            display: flex; align-items: center; gap: 0.75rem;
+            color: #94a3b8; padding: 0.7rem 0.85rem; border-radius: 8px;
+            margin-bottom: 0.2rem; font-weight: 500; font-size: 0.95rem;
+            text-decoration: none;
+        }
+        .admin-side nav a:hover { background: #1e293b; color: white; }
+        .admin-side nav a.active { background: var(--green); color: white; }
+        .admin-side nav a i { width: 18px; text-align: center; }
+        .admin-side .footer-link {
+            position: absolute; bottom: 1.5rem; left: 1rem; right: 1rem;
+            border-top: 1px solid #334155; padding-top: 1rem;
+        }
+        .admin-side .footer-link a { color: #94a3b8; font-size: 0.85rem; }
+
+        .admin-main { padding: 2rem; max-width: 100%; }
+        .admin-topbar {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 2rem; gap: 1rem; flex-wrap: wrap;
+        }
+        .admin-topbar h1 { font-size: 1.6rem; font-weight: 800; }
+        .admin-user { display: flex; align-items: center; gap: 0.75rem; }
+        .admin-user .avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: var(--green-mint); color: var(--green);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700;
+        }
+        .admin-user .meta { font-size: 0.9rem; }
+        .admin-user .meta strong { display: block; }
+        .admin-user .meta small { color: var(--muted); }
+
+        /* ===== CARDS / STATS ===== */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+        .stat {
+            background: white; border: 1px solid var(--line); border-radius: 14px;
+            padding: 1.5rem; box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+        }
+        .stat .lbl { font-size: 0.82rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.5rem; }
+        .stat .val { font-size: 2.1rem; font-weight: 800; line-height: 1; }
+        .stat.warn .val { color: var(--amber); }
+        .stat.ok .val { color: var(--green); }
+        .stat.danger .val { color: var(--red); }
+
+        /* ===== TABLES ===== */
+        .card {
+            background: white; border: 1px solid var(--line); border-radius: 14px;
+            box-shadow: 0 1px 2px rgba(15,23,42,0.04); overflow: hidden;
+        }
+        .card-head { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .card-head h2 { font-size: 1.15rem; font-weight: 700; }
+        .card-body { padding: 1.5rem; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 0.85rem 1rem; border-bottom: 1px solid var(--line); }
+        th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); font-weight: 600; background: var(--bg); }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--bg); }
+        td img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+
+        /* ===== FORMS ===== */
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        @media (max-width: 700px) { .form-row { grid-template-columns: 1fr; } }
+        .field { display: flex; flex-direction: column; }
+        .field label { font-size: 0.85rem; font-weight: 600; color: var(--ink-2); margin-bottom: 0.4rem; }
+        .field input[type="text"], .field input[type="number"], .field input[type="date"],
+        .field input[type="url"], .field input[type="tel"], .field input[type="color"],
+        .field textarea, .field select {
+            width: 100%; padding: 0.7rem 0.85rem; border: 1.5px solid var(--line);
+            border-radius: 8px; font-size: 0.95rem; font-family: inherit; background: white;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .field input:focus, .field textarea:focus, .field select:focus {
+            outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(5,150,105,0.15);
+        }
+        .field textarea { min-height: 100px; resize: vertical; }
+        .field .help { font-size: 0.8rem; color: var(--muted); margin-top: 0.35rem; }
+        .checkbox-row { display: flex; align-items: center; gap: 0.5rem; }
+        .checkbox-row input { width: 18px; height: 18px; }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.65rem 1.1rem; border-radius: 8px; font-weight: 600; font-size: 0.92rem;
+            text-decoration: none; border: none; cursor: pointer; transition: transform 0.1s, box-shadow 0.1s;
+            font-family: inherit;
+        }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15,23,42,0.1); }
+        .btn-primary { background: var(--green); color: white; }
+        .btn-primary:hover { background: var(--green-dark); color: white; }
+        .btn-secondary { background: white; color: var(--ink); border: 1.5px solid var(--line); }
+        .btn-danger { background: var(--red); color: white; }
+        .btn-danger:hover { background: #b91c1c; color: white; }
+        .btn-amber { background: var(--amber); color: white; }
+        .btn-sm { padding: 0.4rem 0.75rem; font-size: 0.82rem; }
+
+        /* ===== BADGE ===== */
+        .badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+        .badge.green { background: var(--green-soft); color: var(--green-darker); }
+        .badge.amber { background: #fef3c7; color: #92400e; }
+        .badge.red { background: #fee2e2; color: #991b1b; }
+        .badge.gray { background: #e2e8f0; color: #334155; }
+
+        /* ===== ALERT ===== */
+        .alert { padding: 1rem 1.25rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .alert.error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+        .alert.success { background: var(--green-soft); color: var(--green-darker); border: 1px solid #a7f3d0; }
+        .alert.info { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+
+        /* ===== LOGIN ===== */
+        .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem 1.5rem;
+            background: linear-gradient(135deg, var(--green-mint) 0%, #f0f9ff 100%); }
+        .login-card {
+            background: white; border-radius: 20px; max-width: 440px; width: 100%;
+            padding: 2.5rem; box-shadow: 0 20px 60px rgba(15,23,42,0.12);
+        }
+        .login-card .logo { text-align: center; margin-bottom: 2rem; }
+        .login-card .logo img { height: 44px; margin: 0 auto 0.75rem; }
+        .login-card .logo h1 { font-size: 1.35rem; font-weight: 800; }
+        .login-card .logo p { color: var(--muted); font-size: 0.95rem; margin-top: 0.25rem; }
+        .otp-input {
+            font-family: 'Courier New', monospace;
+            text-align: center; font-size: 2rem !important; letter-spacing: 0.5rem !important;
+            font-weight: 700 !important;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .admin-layout { grid-template-columns: 1fr; }
+            .admin-side { position: relative; height: auto; }
+            .admin-side .footer-link { position: relative; bottom: auto; left: auto; right: auto; margin-top: 1rem; }
+            .admin-main { padding: 1.5rem 1rem; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 0.6rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>

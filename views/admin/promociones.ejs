@@ -1,0 +1,43 @@
+<%- include('../partials/admin-shell', { title: 'Promociones' }) %>
+<%- include('../partials/admin-sidebar', { active: 'promociones', pageTitle: 'Promociones' }) %>
+
+<div class="card">
+    <div class="card-head">
+        <h2><i class="fas fa-bullhorn"></i> <%= promociones.length %> promociones</h2>
+        <a href="/admin/promociones/nueva" class="btn btn-primary"><i class="fas fa-plus"></i> Nueva promoción</a>
+    </div>
+    <% if (promociones.length === 0) { %>
+        <div class="card-body" style="text-align: center; padding: 3rem;">
+            <i class="fas fa-bullhorn" style="font-size: 3rem; color: var(--line); margin-bottom: 1rem;"></i>
+            <p style="color: var(--muted);">No hay promociones cargadas.</p>
+        </div>
+    <% } else { %>
+        <table>
+            <thead><tr><th>Imagen</th><th>Título</th><th>Vigencia</th><th>Orden</th><th>Estado</th><th></th></tr></thead>
+            <tbody>
+                <% promociones.forEach(function(p){ %>
+                    <tr>
+                        <td><% if (p.imagen) { %><img src="<%= p.imagen %>" alt=""><% } else { %><div style="width:60px; height:60px; background:<%= p.color_acento %>; border-radius:8px;"></div><% } %></td>
+                        <td>
+                            <strong><%= p.titulo %></strong>
+                            <% if (p.subtitulo) { %><br><small style="color: var(--muted);"><%= p.subtitulo %></small><% } %>
+                        </td>
+                        <td style="font-size: 0.88rem;">
+                            <% if (p.vigente_desde) { %>Desde <%= new Date(p.vigente_desde).toLocaleDateString('es-MX') %><br><% } %>
+                            <% if (p.vigente_hasta) { %>Hasta <%= new Date(p.vigente_hasta).toLocaleDateString('es-MX') %><% } %>
+                        </td>
+                        <td><%= p.orden %></td>
+                        <td><% if (p.activa) { %><span class="badge green">Activa</span><% } else { %><span class="badge gray">Pausada</span><% } %></td>
+                        <td style="text-align: right; white-space: nowrap;">
+                            <a href="/admin/promociones/<%= p.id %>/editar" class="btn btn-secondary btn-sm"><i class="fas fa-pen"></i></a>
+                            <form action="/admin/promociones/<%= p.id %>/eliminar" method="POST" style="display:inline;" onsubmit="return confirm('¿Eliminar promoción?')">
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</div>
+</main></div></body></html>

@@ -1,8 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+const cookieParser = require('cookie-parser');
+const { pool } = require('./config/database');
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.set('trust proxy', 1);
 
 // Chatbot services
 let claudeService;
@@ -21,18 +27,58 @@ try {
 // Timestamp helper function for logging
 function getTimestamp() {
     const now = new Date();
-    const date = now.toLocaleDateString('es-MX', { 
-        year: 'numeric', 
-        month: '2-digit', 
-        day: '2-digit' 
+    const date = now.toLocaleDateString('es-MX', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
     });
-    const time = now.toLocaleTimeString('es-MX', { 
-        hour: '2-digit', 
-        minute: '2-digit', 
+    const time = now.toLocaleTimeString('es-MX', {
+        hour: '2-digit',
+        minute: '2-digit',
         second: '2-digit',
-        hour12: false 
+        hour12: false
     });
     return `[${date} ${time}]`;
+}
+
+// SMS notification for new leads
+const SMS_GATEWAY_URL = process.env.SMS_GATEWAY_URL || 'https://sms.lizza.com.mx';
+const SMS_API_KEY = process.env.SMS_API_KEY || '';
+const SALMA_PHONE = '+528120272752';
+// El módem Huawei E3372 solo entrega con formato nacional MX (10 dígitos sin +52)
+const SALMA_PHONE_SMS = '8120272752';
+
+async function sendLeadSMS(name, phone) {
+    if (!SMS_API_KEY) {
+        console.log(getTimestamp() + ' - ⚠️ SMS_API_KEY no configurada - SMS omitido');
+        return;
+    }
+
+    try {
+        const message = `🚗 NUEVO LEAD BYD!\nNombre: ${name}\nTel: ${phone || 'No proporcionado'}\n\n📱 Formulario del chat`;
+
+        const response = await fetch(`${SMS_GATEWAY_URL}/send-sms`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-API-Key': SMS_API_KEY
+            },
+            body: JSON.stringify({
+                phone: SALMA_PHONE_SMS,
+                message: message
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            console.log(getTimestamp() + ` - 📱 SMS enviado a Salma - Nuevo lead: ${name}`);
+        } else {
+            console.error(getTimestamp() + ' - ❌ Error enviando SMS:', result.error);
+        }
+    } catch (error) {
+        console.error(getTimestamp() + ' - ❌ Error en sendLeadSMS:', error.message);
+    }
 }
 
 // Serve static files
@@ -49,6 +95,31 @@ app.set('views', path.join(__dirname, 'views'));
 // Parse JSON bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Sirve archivos subidos por admin
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+    maxAge: '7d',
+    setHeaders: (res) => res.set('X-Content-Type-Options', 'nosniff')
+}));
+
+// Sesiones (Postgres-backed)
+app.use(session({
+    store: new pgSession({ pool: pool, tableName: 'session', createTableIfMissing: false }),
+    secret: process.env.SESSION_SECRET || 'byd_salma_dev_secret_change_in_prod',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax'
+    }
+}));
+
+// Routers nuevos
+app.use('/admin', require('./routes/admin'));
+app.use('/', require('./routes/public'));
 
 // BYD Vehicle Data (imported from Interactive App)
 const vehicleSpecs = {
@@ -882,7 +953,23 @@ app.get('/mockup', (req, res) => {
     res.render('mockup-premium');
 });
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+    // Cargar últimas entregas y testimonios destacados
+    let ultimasEntregas = [];
+    let testimoniosDestacados = [];
+    let promocionesActivas = [];
+    try {
+        const db = require('./config/database');
+        const e = await db.query(`SELECT * FROM entregas WHERE publicada = TRUE ORDER BY destacada DESC, fecha_entrega DESC LIMIT 6`);
+        ultimasEntregas = e.rows;
+        const t = await db.query(`SELECT * FROM comentarios WHERE aprobado = TRUE ORDER BY destacado DESC, created_at DESC LIMIT 3`);
+        testimoniosDestacados = t.rows;
+        const p = await db.query(`SELECT * FROM promociones WHERE activa = TRUE AND (vigente_hasta IS NULL OR vigente_hasta >= CURRENT_DATE) ORDER BY orden ASC, id DESC LIMIT 3`);
+        promocionesActivas = p.rows;
+    } catch (err) {
+        console.error('Error cargando datos home:', err.message);
+    }
+
     // Convert vehicle specs to display format
     const vehicleData = [
         {
@@ -1010,10 +1097,14 @@ app.get('/', (req, res) => {
         }
     ];
 
-    res.render('index', { 
+    res.render('index', {
         vehicles: vehicleData,
         stats: statsData,
-        whyBydFeatures: whyBydFeatures
+        whyBydFeatures: whyBydFeatures,
+        gasPrices: gasPrices,
+        ultimasEntregas,
+        testimoniosDestacados,
+        promocionesActivas
     });
 });
 
@@ -1643,6 +1734,98 @@ app.post('/api/chatbot/handoff', async (req, res) => {
         message: 'Un asesor te contactará pronto.',
         estimatedWaitTime: '5-10 minutos'
     });
+});
+
+// POST /api/chatbot/lead-form - Guardar datos del formulario HTML
+app.post('/api/chatbot/lead-form', async (req, res) => {
+    const { name, phone, conversationId, sessionId } = req.body;
+
+    console.log(getTimestamp() + ` - 📝 Lead Form recibido: ${name}, ${phone}`);
+
+    // Validar datos
+    if (!name || name.trim().length < 2) {
+        return res.status(400).json({
+            success: false,
+            message: 'Por favor ingresa tu nombre completo.'
+        });
+    }
+
+    // Limpiar teléfono
+    let cleanPhone = phone ? phone.replace(/\D/g, '') : '';
+    if (cleanPhone.startsWith('52') && cleanPhone.length === 12) {
+        cleanPhone = cleanPhone.slice(2);
+    }
+
+    if (cleanPhone && cleanPhone.length !== 10) {
+        return res.status(400).json({
+            success: false,
+            message: 'El teléfono debe tener 10 dígitos.'
+        });
+    }
+
+    try {
+        // Guardar directamente en la base de datos
+        const db = require('./config/database');
+
+        // Buscar si ya existe un lead para esta conversación
+        let leadId = null;
+        if (conversationId) {
+            const existingConv = await db.query(
+                'SELECT lead_id FROM conversations WHERE id = $1',
+                [conversationId]
+            );
+            if (existingConv.rows.length > 0 && existingConv.rows[0].lead_id) {
+                leadId = existingConv.rows[0].lead_id;
+            }
+        }
+
+        if (leadId) {
+            // Actualizar lead existente
+            await db.query(
+                `UPDATE leads SET
+                    name = COALESCE($1, name),
+                    phone = COALESCE($2, phone),
+                    updated_at = CURRENT_TIMESTAMP
+                 WHERE id = $3`,
+                [name.trim(), cleanPhone || null, leadId]
+            );
+            console.log(getTimestamp() + ` - ✅ Lead actualizado: ${name}`);
+        } else {
+            // Crear nuevo lead
+            const result = await db.query(
+                `INSERT INTO leads (name, phone, email, source, created_at, updated_at)
+                 VALUES ($1, $2, $3, 'chatbot_form', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                 RETURNING id`,
+                [name.trim(), cleanPhone || null, `lead_form_${Date.now()}@noemail.salmabydriver.com`]
+            );
+            leadId = result.rows[0].id;
+            console.log(getTimestamp() + ` - ✅ Nuevo lead creado: ${name} (${leadId})`);
+
+            // Vincular a la conversación si existe
+            if (conversationId) {
+                await db.query(
+                    'UPDATE conversations SET lead_id = $1 WHERE id = $2',
+                    [leadId, conversationId]
+                );
+            }
+
+            // Enviar SMS de notificación a Salma
+            sendLeadSMS(name.trim(), cleanPhone);
+        }
+
+        res.json({
+            success: true,
+            message: `¡Gracias ${name.split(' ')[0]}! Ya tengo tus datos.`,
+            leadId: leadId
+        });
+
+    } catch (error) {
+        console.error(getTimestamp() + ` - ❌ Error guardando lead form:`, error.message);
+        res.status(500).json({
+            success: false,
+            message: 'Hubo un error guardando tus datos. Por favor intenta de nuevo.'
+        });
+    }
 });
 
 // Start server

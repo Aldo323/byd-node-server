@@ -1,0 +1,48 @@
+<%- include('../partials/admin-shell', { title: 'Dashboard' }) %>
+<%- include('../partials/admin-sidebar', { active: 'dashboard', pageTitle: 'Dashboard' }) %>
+
+<div class="stats-grid">
+    <div class="stat ok">
+        <div class="lbl">Entregas publicadas</div>
+        <div class="val"><%= stats.entregas_publicadas || 0 %></div>
+    </div>
+    <div class="stat">
+        <div class="lbl">Entregas del mes</div>
+        <div class="val"><%= stats.entregas_mes || 0 %></div>
+    </div>
+    <div class="stat <%= (stats.comentarios_pendientes || 0) > 0 ? 'warn' : '' %>">
+        <div class="lbl">Comentarios pendientes</div>
+        <div class="val"><%= stats.comentarios_pendientes || 0 %></div>
+    </div>
+    <div class="stat ok">
+        <div class="lbl">Comentarios aprobados</div>
+        <div class="val"><%= stats.comentarios_aprobados || 0 %></div>
+    </div>
+    <div class="stat">
+        <div class="lbl">Promociones activas</div>
+        <div class="val"><%= stats.promociones_activas || 0 %></div>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem;">
+    <div class="card">
+        <div class="card-head"><h2><i class="fas fa-bolt"></i> Acciones rápidas</h2></div>
+        <div class="card-body" style="display:flex; flex-direction: column; gap: 0.75rem;">
+            <a href="/admin/entregas/nueva" class="btn btn-primary"><i class="fas fa-plus"></i> Subir nueva entrega</a>
+            <a href="/admin/comentarios?filter=pendientes" class="btn btn-amber"><i class="fas fa-clock"></i> Moderar comentarios pendientes</a>
+            <a href="/admin/promociones/nueva" class="btn btn-secondary"><i class="fas fa-bullhorn"></i> Crear promoción</a>
+            <a href="/admin/contenido/que-es-byd" class="btn btn-secondary"><i class="fas fa-pen"></i> Editar "¿Qué es BYD?"</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-head"><h2><i class="fas fa-link"></i> Enlaces públicos</h2></div>
+        <div class="card-body" style="display:flex; flex-direction: column; gap: 0.5rem;">
+            <a href="/" target="_blank"><i class="fas fa-up-right-from-square"></i> Home (cálculo de ahorro)</a>
+            <a href="/entregas" target="_blank"><i class="fas fa-up-right-from-square"></i> Galería de entregas</a>
+            <a href="/que-es-byd" target="_blank"><i class="fas fa-up-right-from-square"></i> Rincón BYD</a>
+            <a href="/comentarios" target="_blank"><i class="fas fa-up-right-from-square"></i> Testimonios</a>
+            <a href="/calculatusahorros" target="_blank"><i class="fas fa-up-right-from-square"></i> Calculadora completa</a>
+        </div>
+    </div>
+</div>
+</main></div></body></html>

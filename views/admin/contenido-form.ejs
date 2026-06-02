@@ -1,0 +1,24 @@
+<%- include('../partials/admin-shell', { title: 'Editar ' + pagina.titulo }) %>
+<%- include('../partials/admin-sidebar', { active: 'contenido', pageTitle: 'Editar: ' + pagina.titulo }) %>
+
+<div class="card">
+    <div class="card-body">
+        <form action="/admin/contenido/<%= pagina.slug %>" method="POST">
+            <div class="field" style="margin-bottom: 1rem;">
+                <label>Título</label>
+                <input type="text" name="titulo" required maxlength="200" value="<%= pagina.titulo %>">
+            </div>
+            <div class="field" style="margin-bottom: 1rem;">
+                <label>Contenido HTML</label>
+                <textarea name="contenido_html" rows="20" style="min-height: 400px; font-family: 'Courier New', monospace; font-size: 0.88rem;"><%= pagina.contenido_html %></textarea>
+                <div class="help">Puedes usar etiquetas HTML básicas: &lt;p&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;strong&gt;, &lt;a href&gt;, &lt;img src&gt;, etc.</div>
+            </div>
+            <div style="display:flex; gap: 0.75rem;">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+                <a href="/admin/contenido" class="btn btn-secondary">Cancelar</a>
+                <a href="/<%= pagina.slug %>" target="_blank" class="btn btn-secondary"><i class="fas fa-up-right-from-square"></i> Ver pública</a>
+            </div>
+        </form>
+    </div>
+</div>
+</main></div></body></html>

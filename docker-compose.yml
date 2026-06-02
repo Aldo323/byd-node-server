@@ -11,12 +11,26 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3001
+      - SESSION_SECRET=${SESSION_SECRET:-byd_salma_session_secret_change_in_prod_2026}
     restart: unless-stopped
     volumes:
       - ./public:/app/public:ro
       - ./views:/app/views:ro
+      - ./uploads:/app/uploads:rw
+      - ./routes:/app/routes:ro
+      - ./middleware:/app/middleware:ro
+      - ./services:/app/services:ro
+      - ./config:/app/config:ro
+      - ./database:/app/database:ro
+    networks:
+      - unified_network
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
       interval: 30s
       timeout: 10s
       retries: 3
+
+networks:
+  unified_network:
+    external: true
+    name: unified_network

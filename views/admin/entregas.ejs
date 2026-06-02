@@ -1,0 +1,53 @@
+<%- include('../partials/admin-shell', { title: 'Entregas' }) %>
+<%- include('../partials/admin-sidebar', { active: 'entregas', pageTitle: 'Entregas de Salma' }) %>
+
+<div class="card">
+    <div class="card-head">
+        <h2><i class="fas fa-car"></i> <%= entregas.length %> entregas</h2>
+        <a href="/admin/entregas/nueva" class="btn btn-primary"><i class="fas fa-plus"></i> Nueva entrega</a>
+    </div>
+    <% if (entregas.length === 0) { %>
+        <div class="card-body" style="text-align: center; padding: 3rem;">
+            <i class="fas fa-car" style="font-size: 3rem; color: var(--line); margin-bottom: 1rem;"></i>
+            <p style="color: var(--muted);">Todavía no hay entregas registradas.</p>
+            <a href="/admin/entregas/nueva" class="btn btn-primary" style="margin-top: 1rem;"><i class="fas fa-plus"></i> Subir la primera</a>
+        </div>
+    <% } else { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Cliente</th>
+                    <th>Modelo</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% entregas.forEach(function(e){ %>
+                    <tr>
+                        <td><img src="<%= e.foto_thumbnail || e.foto_principal %>" alt=""></td>
+                        <td>
+                            <strong><%= e.cliente_nombre %></strong>
+                            <% if (e.cliente_ciudad) { %><br><small style="color: var(--muted);"><%= e.cliente_ciudad %></small><% } %>
+                        </td>
+                        <td><%= e.modelo %><% if (e.color) { %> · <%= e.color %><% } %></td>
+                        <td><%= e.fecha_entrega ? new Date(e.fecha_entrega).toLocaleDateString('es-MX', {day:'2-digit', month:'short', year:'numeric'}) : '—' %></td>
+                        <td>
+                            <% if (e.publicada) { %><span class="badge green">Publicada</span><% } else { %><span class="badge gray">Borrador</span><% } %>
+                            <% if (e.destacada) { %><span class="badge amber">★ Destacada</span><% } %>
+                        </td>
+                        <td style="text-align: right; white-space: nowrap;">
+                            <a href="/admin/entregas/<%= e.id %>/editar" class="btn btn-secondary btn-sm"><i class="fas fa-pen"></i></a>
+                            <form action="/admin/entregas/<%= e.id %>/eliminar" method="POST" style="display:inline;" onsubmit="return confirm('¿Eliminar esta entrega?')">
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</div>
+</main></div></body></html>

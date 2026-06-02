@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %> · BYD Salma Monterrey</title>
+    <meta name="description" content="<%= pageDescription %>">
+    <link rel="icon" type="image/png" href="/images/byd/bydicono.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --green: #059669; --green-dark: #047857; --green-darker: #064e3b;
+            --green-soft: #d1fae5; --green-mint: #ecfdf5;
+            --blue: #0284c7; --red: #dc2626; --amber: #f59e0b;
+            --ink: #0f172a; --ink-2: #1e293b; --muted: #64748b; --muted-2: #94a3b8;
+            --line: #e2e8f0; --bg: #f8fafc; --white: #fff;
+            --shadow: 0 4px 14px rgba(15,23,42,0.08);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: var(--green); text-decoration: none; }
+
+        /* NAV */
+        .nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+            padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        }
+        .nav-logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; color: var(--ink); }
+        .nav-logo img { height: 32px; }
+        .nav-logo .tag { background: var(--green); color: white; padding: 0.15rem 0.6rem; border-radius: 6px; font-size: 0.7rem; letter-spacing: 0.5px; }
+        .nav-links { display: flex; gap: 1.75rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--ink-2); font-size: 0.95rem; font-weight: 500; }
+        .nav-links a:hover { color: var(--green); }
+        .nav-links a.active { color: var(--green); font-weight: 700; }
+        .btn-wa { background: var(--green); color: white !important; padding: 0.65rem 1.25rem; border: none; border-radius: 10px; font-weight: 600; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+        .btn-wa:hover { background: var(--green-dark); }
+        @media (max-width: 900px) { .nav-links { display: none; } }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #ecfdf5 0%, #f0f9ff 100%);
+            padding: 4rem 1.5rem 3rem; text-align: center;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--green-soft); color: var(--green-darker);
+            padding: 0.4rem 0.9rem; border-radius: 999px;
+            font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem;
+        }
+        .hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .hero p { color: var(--muted); max-width: 720px; margin: 0 auto; font-size: 1.1rem; }
+
+        /* SECTION */
+        .section { padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+
+        /* FOOTER */
+        footer {
+            background: var(--ink); color: var(--muted-2); padding: 3rem 1.5rem 2rem;
+            text-align: center; font-size: 0.9rem;
+        }
+        footer .foot-row { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-bottom: 1.5rem; }
+        footer .foot-row a { color: var(--muted-2); }
+        footer .foot-row a:hover { color: white; }
+        footer .disclaimer { max-width: 700px; margin: 0 auto; font-size: 0.78rem; opacity: 0.7; }
+    </style>
+    <% if (typeof extraStyles !== 'undefined') { %><%- extraStyles %><% } %>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="nav-logo">
+            <img src="/images/byd/BYD-Logo.png" alt="BYD">
+            <span class="tag">SALMA</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="<%= (typeof active !== 'undefined' && active === 'home') ? 'active' : '' %>">Inicio</a></li>
+            <li><a href="/entregas" class="<%= (typeof active !== 'undefined' && active === 'entregas') ? 'active' : '' %>">Entregas</a></li>
+            <li><a href="/que-es-byd" class="<%= (typeof active !== 'undefined' && active === 'byd') ? 'active' : '' %>">¿Qué es BYD?</a></li>
+            <li><a href="/comentarios" class="<%= (typeof active !== 'undefined' && active === 'comentarios') ? 'active' : '' %>">Testimonios</a></li>
+            <li><a href="/calculatusahorros">Calculadora</a></li>
+        </ul>
+        <a href="#" class="btn-wa" onclick="window.open('https://wa.me/528120272752?text=Hola%20Salma%21%20Me%20interesa%20un%20BYD','_blank'); return false;">
+            <i class="fab fa-whatsapp"></i> Salma
+        </a>
+    </nav>

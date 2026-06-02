@@ -138,53 +138,18 @@
 
         /* ============== HERO ============== */
         .hero {
-            background:
-                radial-gradient(1200px 600px at 85% -10%, rgba(16,185,129,0.18), transparent 60%),
-                radial-gradient(900px 500px at 5% 110%, rgba(2,132,199,0.12), transparent 55%),
-                linear-gradient(180deg, #f3fbf7 0%, #eef6ff 100%);
-            padding: 4rem 1.5rem 5.5rem;
+            background: linear-gradient(135deg, #ecfdf5 0%, #f0f9ff 100%);
+            padding: 3.5rem 1.5rem 5rem;
             position: relative;
             overflow: hidden;
         }
-        /* Aurora suave que respira detrás del hero */
         .hero::before {
             content: '';
-            position: absolute; top: -200px; right: -120px;
-            width: 620px; height: 620px;
-            background: radial-gradient(circle, rgba(5, 150, 105, 0.22), transparent 68%);
+            position: absolute; top: -150px; right: -100px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(5, 150, 105, 0.15), transparent 70%);
             border-radius: 50%;
             z-index: 0;
-            filter: blur(8px);
-            animation: heroAura 14s var(--ease-in-out, ease-in-out) infinite;
-        }
-        /* Rejilla de puntos tenue para textura */
-        .hero::after {
-            content: '';
-            position: absolute; inset: 0;
-            background-image: radial-gradient(rgba(11,18,32,0.045) 1px, transparent 1px);
-            background-size: 22px 22px;
-            -webkit-mask-image: radial-gradient(80% 70% at 50% 30%, #000 0%, transparent 75%);
-            mask-image: radial-gradient(80% 70% at 50% 30%, #000 0%, transparent 75%);
-            z-index: 0; pointer-events: none;
-        }
-        @keyframes heroAura {
-            0%, 100% { transform: translate(0,0) scale(1); opacity: .9; }
-            50%      { transform: translate(-30px, 24px) scale(1.08); opacity: 1; }
-        }
-        /* Entrada escalonada del hero al cargar */
-        @keyframes heroRise {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: none; }
-        }
-        .hero-grid > div > * { animation: heroRise .8s var(--ease-out, ease) both; }
-        .hero-grid > div > *:nth-child(1) { animation-delay: .05s; }
-        .hero-grid > div > *:nth-child(2) { animation-delay: .13s; }
-        .hero-grid > div > *:nth-child(3) { animation-delay: .21s; }
-        .hero-grid > div > *:nth-child(4) { animation-delay: .29s; }
-        .hero .calc-card { animation: heroRise .9s var(--ease-out, ease) .22s both; }
-        @media (prefers-reduced-motion: reduce) {
-            .hero::before { animation: none; }
-            .hero-grid > div > *, .hero .calc-card { animation: none; }
         }
         .hero-grid {
             max-width: 1200px; margin: 0 auto;
@@ -543,8 +508,6 @@
         footer .foot-row a:hover { color: white; }
         footer .disclaimer { margin-top: 1.5rem; font-size: 0.78rem; opacity: 0.7; max-width: 700px; margin-left: auto; margin-right: auto; }
     </style>
-    <!-- Design system (capa de gusto, cascadea sobre los tokens de arriba) -->
-    <link rel="stylesheet" href="/css/ds.css?v=1">
 </head>
 <body>
 
@@ -1276,7 +1239,6 @@
     });
 </script>
 
-<script src="/js/motion.js?v=1" defer></script>
 <script src="/js/chat-widget.js?v=2.0.1" defer></script>
 <script src="/js/google-ads-tracking.js" defer></script>
 </body>

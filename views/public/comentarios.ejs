@@ -1,0 +1,122 @@
+<%- include('../partials/public-head', {
+    pageTitle: 'Testimonios · BYD Salma Monterrey',
+    pageDescription: 'Lo que dicen los clientes de Salma sobre sus BYD. Testimonios reales, calificaciones y experiencia de compra.',
+    active: 'comentarios'
+}) %>
+
+<section class="hero">
+    <span class="hero-eyebrow"><i class="fas fa-comments"></i> Testimonios de clientes reales</span>
+    <h1>Lo que dicen quienes ya compraron con Salma.</h1>
+    <p>Cada cliente puede dejar su comentario. Aquí lees experiencias auténticas sobre el proceso, el auto y el ahorro.</p>
+</section>
+
+<section class="section" style="max-width: 1000px;">
+    <% if (success) { %>
+        <div style="background: var(--green-soft); color: var(--green-darker); padding: 1.25rem 1.5rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid #a7f3d0;">
+            <i class="fas fa-check-circle"></i> <strong>¡Gracias!</strong> Tu comentario fue recibido. Salma lo revisará antes de publicarlo.
+        </div>
+    <% } %>
+    <% if (error) { %>
+        <div style="background: #fee2e2; color: #991b1b; padding: 1.25rem 1.5rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid #fecaca;">
+            <i class="fas fa-circle-exclamation"></i> <%= error %>
+        </div>
+    <% } %>
+
+    <!-- Formulario -->
+    <div style="background: white; border-radius: 18px; padding: 2rem; box-shadow: var(--shadow); border: 1px solid var(--line); margin-bottom: 3rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem;">Comparte tu experiencia</h2>
+        <p style="color: var(--muted); margin-bottom: 1.5rem;">Si ya tienes tu BYD (o estás en proceso), cuéntanos cómo te fue. Tu comentario será revisado antes de publicarse.</p>
+
+        <form action="/comentarios" method="POST">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                    <label style="display:block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Tu nombre *</label>
+                    <input type="text" name="nombre" required maxlength="120" style="width:100%; padding: 0.7rem 0.85rem; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; font-family: inherit;">
+                </div>
+                <div>
+                    <label style="display:block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Ciudad</label>
+                    <input type="text" name="ciudad" maxlength="100" style="width:100%; padding: 0.7rem 0.85rem; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; font-family: inherit;" placeholder="Monterrey, N.L.">
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                    <label style="display:block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Tu modelo BYD</label>
+                    <select name="modelo_byd" style="width:100%; padding: 0.7rem 0.85rem; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; font-family: inherit;">
+                        <option value="">— Opcional —</option>
+                        <option>King DM-i</option>
+                        <option>Shark DM-i</option>
+                        <option>Seal</option>
+                        <option>Sea Lion 7</option>
+                        <option>Dolphin Mini</option>
+                        <option>Song Plus</option>
+                        <option>Yuan Pro</option>
+                        <option>Han</option>
+                        <option>Tang</option>
+                        <option>En proceso de compra</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display:block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Calificación</label>
+                    <select name="estrellas" style="width:100%; padding: 0.7rem 0.85rem; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; font-family: inherit;">
+                        <option value="5">★★★★★ Excelente</option>
+                        <option value="4">★★★★☆ Muy bueno</option>
+                        <option value="3">★★★☆☆ Bueno</option>
+                        <option value="2">★★☆☆☆ Regular</option>
+                        <option value="1">★☆☆☆☆ Necesita mejorar</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <label style="display:block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Tu comentario *</label>
+                <textarea name="texto" required minlength="10" maxlength="1500" rows="5" style="width:100%; padding: 0.7rem 0.85rem; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; font-family: inherit; resize: vertical;" placeholder="Cuenta tu experiencia con el auto, la atención de Salma, el proceso de compra..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-wa" style="display: inline-flex; background: var(--green); color: white; border: none; padding: 0.85rem 1.5rem;">
+                <i class="fas fa-paper-plane"></i> Enviar comentario
+            </button>
+        </form>
+    </div>
+
+    <!-- Listado de testimonios -->
+    <% if (comentarios.length > 0) { %>
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem;">
+            <%= comentarios.length %> testimonio<%= comentarios.length === 1 ? '' : 's' %>
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;">
+            <% comentarios.forEach(function(c){ %>
+                <div style="background: white; border-radius: 14px; padding: 1.5rem; border: 1px solid var(--line); <% if (c.destacado) { %>border-color: var(--green); box-shadow: 0 0 0 2px rgba(5,150,105,0.15);<% } %>">
+                    <% if (c.destacado) { %>
+                        <span style="background: var(--green); color: white; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; margin-bottom: 0.75rem; display: inline-block;">
+                            <i class="fas fa-star"></i> DESTACADO
+                        </span>
+                    <% } %>
+                    <div style="color: var(--amber); margin-bottom: 0.75rem;">
+                        <% for (let i = 0; i < (c.estrellas || 5); i++) { %><i class="fas fa-star"></i><% } %>
+                        <% for (let i = (c.estrellas || 5); i < 5; i++) { %><i class="far fa-star"></i><% } %>
+                    </div>
+                    <p style="font-size: 0.98rem; margin-bottom: 1rem; color: var(--ink-2); line-height: 1.6;">"<%= c.texto %>"</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.88rem;">
+                        <div>
+                            <strong style="color: var(--ink); display: block;"><%= c.nombre %></strong>
+                            <% if (c.ciudad) { %><small style="color: var(--muted);"><%= c.ciudad %></small><% } %>
+                        </div>
+                        <% if (c.modelo_byd) { %>
+                            <span style="background: var(--green-mint); color: var(--green-dark); padding: 0.25rem 0.65rem; border-radius: 6px; font-weight: 600;">
+                                <i class="fas fa-car"></i> <%= c.modelo_byd %>
+                            </span>
+                        <% } %>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div style="text-align: center; padding: 3rem 1rem; background: white; border-radius: 14px; border: 1px solid var(--line);">
+            <i class="fas fa-comment-dots" style="font-size: 2.5rem; color: var(--line); margin-bottom: 1rem;"></i>
+            <p style="color: var(--muted);">Todavía no hay testimonios públicos. ¡Sé el primero en compartir tu experiencia!</p>
+        </div>
+    <% } %>
+</section>
+
+<%- include('../partials/public-footer') %>

@@ -1,0 +1,72 @@
+<%- include('../partials/public-head', {
+    pageTitle: 'Entregas de Salma · BYD Monterrey',
+    pageDescription: 'Galería real de entregas gestionadas por Salma Zapata, asesora BYD en Monterrey. Clientes felices, autos entregados.',
+    active: 'entregas'
+}) %>
+
+<section class="hero">
+    <span class="hero-eyebrow"><i class="fas fa-camera"></i> Entregas reales · Gestionadas por Salma Zapata</span>
+    <h1>Cada entrega es una historia.</h1>
+    <p>Aquí vas a ver a personas reales que confiaron en Salma para llevarse su BYD. Quizá la próxima foto seas tú.</p>
+</section>
+
+<section class="section">
+    <% if (entregas.length === 0) { %>
+        <div style="text-align: center; padding: 4rem 1rem; background: white; border-radius: 18px; border: 1px solid var(--line);">
+            <i class="fas fa-camera-retro" style="font-size: 3rem; color: var(--line); margin-bottom: 1rem;"></i>
+            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Pronto verás aquí las entregas</h3>
+            <p style="color: var(--muted);">Salma está documentando cada entrega. Vuelve pronto.</p>
+            <a href="https://wa.me/528120272752" target="_blank" class="btn-wa" style="margin-top: 1.5rem; display: inline-flex;">
+                <i class="fab fa-whatsapp"></i> Hablar con Salma
+            </a>
+        </div>
+    <% } else { %>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+            <% entregas.forEach(function(e){ %>
+                <article style="background: white; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform 0.2s;">
+                    <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--bg);">
+                        <img src="<%= e.foto_principal %>" alt="Entrega <%= e.cliente_nombre %> - <%= e.modelo %>" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                        <% if (e.destacada) { %>
+                            <span style="position: absolute; top: 0.75rem; left: 0.75rem; background: var(--amber); color: white; padding: 0.25rem 0.65rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700;">
+                                <i class="fas fa-star"></i> DESTACADA
+                            </span>
+                        <% } %>
+                        <span style="position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(15,23,42,0.85); color: white; padding: 0.25rem 0.65rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">
+                            <i class="fas fa-car"></i> <%= e.modelo %>
+                        </span>
+                    </div>
+                    <div style="padding: 1.25rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem; margin-bottom: 0.5rem;">
+                            <div>
+                                <h3 style="font-size: 1.1rem; font-weight: 700;"><%= e.cliente_nombre %></h3>
+                                <% if (e.cliente_ciudad) { %>
+                                    <small style="color: var(--muted); font-size: 0.85rem;"><i class="fas fa-map-marker-alt"></i> <%= e.cliente_ciudad %></small>
+                                <% } %>
+                            </div>
+                            <% if (e.fecha_entrega) { %>
+                                <small style="color: var(--green); font-weight: 600; white-space: nowrap; font-size: 0.85rem;">
+                                    <%= new Date(e.fecha_entrega).toLocaleDateString('es-MX', {day:'numeric', month:'short', year:'numeric'}) %>
+                                </small>
+                            <% } %>
+                        </div>
+                        <% if (e.color) { %><small style="color: var(--muted);">Color: <%= e.color %></small><% } %>
+                        <% if (e.descripcion) { %>
+                            <p style="margin-top: 0.75rem; color: var(--ink-2); font-size: 0.95rem;"><%= e.descripcion %></p>
+                        <% } %>
+                    </div>
+                </article>
+            <% }) %>
+        </div>
+    <% } %>
+
+    <div style="margin-top: 4rem; text-align: center; padding: 3rem 2rem; background: linear-gradient(135deg, var(--green-darker), var(--green)); border-radius: 24px; color: white;">
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem;">¿Listo para que tu foto esté aquí?</h2>
+        <p style="opacity: 0.9; margin-bottom: 2rem; font-size: 1.05rem;">Agenda tu cita con Salma y empieza tu historia BYD.</p>
+        <a href="https://wa.me/528120272752?text=Hola%20Salma%21%20Quiero%20agendar%20cita%20para%20conocer%20BYD" target="_blank"
+           style="background: white; color: var(--green-darker); padding: 1rem 2rem; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            <i class="fab fa-whatsapp"></i> Agendar con Salma
+        </a>
+    </div>
+</section>
+
+<%- include('../partials/public-footer') %>

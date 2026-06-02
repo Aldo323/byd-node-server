@@ -217,6 +217,22 @@
     color: var(--chat-gold);
 }
 
+/* Resaltado de información de contacto (nombre y teléfono) */
+.chat-message .lead-highlight {
+    color: #d4a020;
+    font-weight: 600;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(184, 150, 46, 0.1) 100%);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.chat-message.user .lead-highlight {
+    color: #8B6914;
+    background: rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
 .chat-message.bot a {
     color: var(--chat-gold);
     text-decoration: none;

@@ -1,0 +1,63 @@
+<%- include('../partials/admin-shell', { title: 'Comentarios' }) %>
+<%- include('../partials/admin-sidebar', { active: 'comentarios', pageTitle: 'Moderar comentarios' }) %>
+
+<div style="display:flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+    <a href="/admin/comentarios?filter=pendientes" class="btn <%= filter === 'pendientes' ? 'btn-primary' : 'btn-secondary' %>"><i class="fas fa-clock"></i> Pendientes</a>
+    <a href="/admin/comentarios?filter=aprobados" class="btn <%= filter === 'aprobados' ? 'btn-primary' : 'btn-secondary' %>"><i class="fas fa-check-circle"></i> Aprobados</a>
+    <a href="/admin/comentarios?filter=todos" class="btn <%= filter === 'todos' ? 'btn-primary' : 'btn-secondary' %>">Todos</a>
+</div>
+
+<div class="card">
+    <% if (comentarios.length === 0) { %>
+        <div class="card-body" style="text-align: center; padding: 3rem;">
+            <i class="fas fa-comments" style="font-size: 3rem; color: var(--line); margin-bottom: 1rem;"></i>
+            <p style="color: var(--muted);">No hay comentarios <%= filter === 'pendientes' ? 'pendientes de moderación' : '' %>.</p>
+        </div>
+    <% } else { %>
+        <table>
+            <thead>
+                <tr><th>Autor</th><th>Comentario</th><th>★</th><th>Fecha</th><th>Estado</th><th></th></tr>
+            </thead>
+            <tbody>
+                <% comentarios.forEach(function(c){ %>
+                    <tr>
+                        <td>
+                            <strong><%= c.nombre %></strong>
+                            <% if (c.ciudad) { %><br><small style="color: var(--muted);"><%= c.ciudad %></small><% } %>
+                            <% if (c.modelo_byd) { %><br><small style="color: var(--green);"><i class="fas fa-car"></i> <%= c.modelo_byd %></small><% } %>
+                        </td>
+                        <td style="max-width: 400px;"><%= c.texto %></td>
+                        <td>
+                            <% for (let i = 0; i < (c.estrellas || 5); i++) { %><i class="fas fa-star" style="color:#f59e0b; font-size:0.8rem;"></i><% } %>
+                        </td>
+                        <td style="white-space: nowrap; font-size: 0.85rem; color: var(--muted);">
+                            <%= new Date(c.created_at).toLocaleDateString('es-MX', {day:'2-digit', month:'short', year:'numeric'}) %>
+                        </td>
+                        <td>
+                            <% if (c.aprobado) { %><span class="badge green">Aprobado</span><% } else { %><span class="badge amber">Pendiente</span><% } %>
+                            <% if (c.destacado) { %><span class="badge amber">★</span><% } %>
+                        </td>
+                        <td style="white-space: nowrap; text-align: right;">
+                            <% if (!c.aprobado) { %>
+                                <form action="/admin/comentarios/<%= c.id %>/aprobar" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-primary btn-sm" title="Aprobar"><i class="fas fa-check"></i></button>
+                                </form>
+                            <% } else { %>
+                                <form action="/admin/comentarios/<%= c.id %>/destacar" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-amber btn-sm" title="Destacar"><i class="fas fa-star"></i></button>
+                                </form>
+                                <form action="/admin/comentarios/<%= c.id %>/rechazar" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-secondary btn-sm" title="Despublicar"><i class="fas fa-eye-slash"></i></button>
+                                </form>
+                            <% } %>
+                            <form action="/admin/comentarios/<%= c.id %>/eliminar" method="POST" style="display:inline;" onsubmit="return confirm('¿Eliminar comentario?')">
+                                <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</div>
+</main></div></body></html>

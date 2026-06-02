@@ -1,13 +1,143 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2H9XL972Q9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2H9XL972Q9');
+      // Google Ads
+      gtag('config', 'AW-17851391804');
+      gtag('config', 'GT-5NGSPQKL');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BYD Monterrey | Concesionario Premium - MOCKUP</title>
-    <meta name="description" content="Mockup de nuevo diseno premium para BYD Monterrey">
+    <title>BYD Monterrey | Salma - Tu Asesora Personal de Autos Electricos e Hibridos</title>
+    <meta name="description" content="Salma, tu asesora personal BYD en Monterrey. Informacion y cotizaciones de BYD Dolphin, Seal, Song Plus y mas. Agenda tu prueba de manejo con Salma en Guadalupe N.L.">
+    <meta name="geo.region" content="MX-NLE">
+    <meta name="geo.placename" content="Monterrey, Nuevo Leon, Mexico">
+    <meta name="geo.position" content="25.6866;-100.3161">
+    <meta name="ICBM" content="25.6866, -100.3161">
+
+    <!-- URL Canónica -->
+    <link rel="canonical" href="https://salmabydriver.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://salmabydriver.com/">
+    <meta property="og:title" content="BYD Monterrey | Salma - Tu Asesora Personal de Autos Eléctricos">
+    <meta property="og:description" content="Salma, tu asesora personal BYD en Monterrey. Cotiza BYD King, Shark, Seal, Dolphin y más. Agenda tu prueba de manejo hoy.">
+    <meta property="og:image" content="https://salmabydriver.com/images/byd/byd-auto-king_auto_electrico_BYD.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="BYD Monterrey - Salma">
+    <meta property="fb:page_id" content="100063901639081">
+    <meta property="article:publisher" content="https://www.facebook.com/profile.php?id=100063901639081">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://salmabydriver.com/">
+    <meta name="twitter:title" content="BYD Monterrey | Salma - Tu Asesora Personal de Autos Eléctricos">
+    <meta name="twitter:description" content="Salma, tu asesora personal BYD en Monterrey. Cotiza BYD King, Shark, Seal, Dolphin y más. Agenda tu prueba de manejo hoy.">
+    <meta name="twitter:image" content="https://salmabydriver.com/images/byd/byd-auto-king_auto_electrico_BYD.png">
+
+    <!-- Schema.org - LocalBusiness + AutoDealer -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AutoDealer",
+        "name": "BYD Monterrey - Salma",
+        "description": "Asesora personal de autos eléctricos e híbridos BYD en Monterrey, Nuevo León",
+        "url": "https://salmabydriver.com",
+        "telephone": "+52 81 2027 2752",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Avenida las Américas Norte & Málaga, BYD Lindavista CLEBER",
+            "addressLocality": "Guadalupe",
+            "addressRegion": "Nuevo León",
+            "postalCode": "67130",
+            "addressCountry": "MX"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 25.6866,
+            "longitude": -100.3161
+        },
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "09:00",
+            "closes": "19:00"
+        },
+        "priceRange": "$$$",
+        "image": "https://salmabydriver.com/images/byd/byd-auto-king_auto_electrico_BYD.png",
+        "sameAs": [
+            "https://www.facebook.com/profile.php?id=100063901639081"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "BYD"
+        },
+        "makesOffer": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Car",
+                    "name": "BYD King",
+                    "brand": "BYD",
+                    "vehicleEngine": {
+                        "@type": "EngineSpecification",
+                        "fuelType": "Híbrido"
+                    }
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Car",
+                    "name": "BYD Shark",
+                    "brand": "BYD",
+                    "vehicleEngine": {
+                        "@type": "EngineSpecification",
+                        "fuelType": "Híbrido"
+                    }
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Car",
+                    "name": "BYD Seal",
+                    "brand": "BYD",
+                    "vehicleEngine": {
+                        "@type": "EngineSpecification",
+                        "fuelType": "Eléctrico"
+                    }
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Car",
+                    "name": "BYD Sea Lion 7",
+                    "brand": "BYD",
+                    "vehicleEngine": {
+                        "@type": "EngineSpecification",
+                        "fuelType": "Eléctrico"
+                    }
+                }
+            }
+        ]
+    }
+    </script>
+
     <link rel="icon" type="image/png" href="/images/byd/bydicono.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/mockup-premium.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/chat-widget.css">
 </head>
 <body>
     <!-- Premium Navigation -->
@@ -24,8 +154,11 @@
             <li><a href="/calculatusahorros">Calculadora</a></li>
         </ul>
         <button class="nav-cta" onclick="openWhatsApp()">Agendar Cita</button>
-        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
     <!-- Hero Section with Carousel -->
     <section class="hero-premium">
@@ -37,7 +170,6 @@
                 <!-- Slide 1: BYD King -->
                 <div class="carousel-slide active" data-model="king">
                     <div class="hero-content">
-                        <p class="hero-tagline">SUV Hibrido Mas Vendido</p>
                         <h1 class="hero-title">BYD KING</h1>
                         <p class="hero-subtitle">Potencia hibrida con la mejor autonomia de su clase. El equilibrio perfecto entre rendimiento y eficiencia.</p>
 
@@ -65,7 +197,6 @@
                 <!-- Slide 2: BYD Shark -->
                 <div class="carousel-slide" data-model="shark">
                     <div class="hero-content">
-                        <p class="hero-tagline">La Primera Pickup Hibrida</p>
                         <h1 class="hero-title">BYD SHARK</h1>
                         <p class="hero-subtitle">Revoluciona el segmento pickup con tecnologia hibrida. Potencia para el trabajo, eficiencia para el dia a dia.</p>
 
@@ -93,7 +224,6 @@
                 <!-- Slide 3: BYD Seal -->
                 <div class="carousel-slide" data-model="seal">
                     <div class="hero-content">
-                        <p class="hero-tagline">Sedan Deportivo Electrico</p>
                         <h1 class="hero-title">BYD SEAL</h1>
                         <p class="hero-subtitle">Elegancia deportiva 100% electrica. Aceleracion brutal con cero emisiones y maxima sofisticacion.</p>
 
@@ -121,7 +251,6 @@
                 <!-- Slide 4: BYD Sea Lion 7 -->
                 <div class="carousel-slide" data-model="sealion">
                     <div class="hero-content">
-                        <p class="hero-tagline">SUV Electrica Premium</p>
                         <h1 class="hero-title">SEA LION 7</h1>
                         <p class="hero-subtitle">El SUV electrico que redefine el lujo. Espacio, tecnologia y rendimiento en perfecta armonia.</p>
 
@@ -466,7 +595,7 @@
                 <li><a href="#asesora">Contacto</a></li>
                 <li><a href="/legal/privacidad">Privacidad</a></li>
             </ul>
-            <p class="footer-copy">&copy; 2025 Salma - Asesora BYD Monterrey</p>
+            <p class="footer-copy">&copy; 2026 Salma - Asesora BYD Monterrey</p>
         </div>
     </footer>
 
@@ -481,24 +610,20 @@
         let currentSlide = 0;
         let slideInterval;
         let progressInterval;
-        const slideDuration = 6000; // 6 seconds per slide
-        const progressStep = 50; // Update progress every 50ms
+        const slideDuration = 6000;
+        const progressStep = 50;
 
         function goToSlide(index) {
-            // Remove active class from current slide and dot
             slides[currentSlide].classList.remove('active');
             dots[currentSlide].classList.remove('active');
 
-            // Update current slide index
             currentSlide = index;
             if (currentSlide >= slides.length) currentSlide = 0;
             if (currentSlide < 0) currentSlide = slides.length - 1;
 
-            // Add active class to new slide and dot
             slides[currentSlide].classList.add('active');
             dots[currentSlide].classList.add('active');
 
-            // Reset progress bar
             resetProgress();
         }
 
@@ -511,18 +636,13 @@
         }
 
         function resetProgress() {
-            // Clear existing intervals
             clearInterval(progressInterval);
-
-            // Reset progress bar
             let progress = 0;
             progressBar.style.width = '0%';
 
-            // Start new progress animation
             progressInterval = setInterval(() => {
                 progress += (progressStep / slideDuration) * 100;
                 progressBar.style.width = progress + '%';
-
                 if (progress >= 100) {
                     clearInterval(progressInterval);
                 }
@@ -539,7 +659,6 @@
             clearInterval(progressInterval);
         }
 
-        // Event Listeners
         prevBtn.addEventListener('click', () => {
             stopAutoSlide();
             prevSlide();
@@ -560,12 +679,10 @@
             });
         });
 
-        // Pause on hover
         const carousel = document.querySelector('.hero-carousel');
         carousel.addEventListener('mouseenter', stopAutoSlide);
         carousel.addEventListener('mouseleave', startAutoSlide);
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') {
                 stopAutoSlide();
@@ -578,7 +695,6 @@
             }
         });
 
-        // Touch/Swipe support
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -606,7 +722,6 @@
             }
         }
 
-        // Start carousel
         startAutoSlide();
 
         // ========== NAVBAR SCROLL EFFECT ==========
@@ -634,10 +749,59 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
+                    // Cerrar menú móvil si está abierto
+                    closeMobileMenu();
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
+
+        // ========== MOBILE MENU TOGGLE ==========
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const navLinks = document.querySelector('.nav-links');
+        const navCta = document.querySelector('.nav-cta');
+
+        function openMobileMenu() {
+            navLinks.classList.add('active');
+            navCta.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            navLinks.classList.remove('active');
+            navCta.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = '';
+        }
+
+        function toggleMobileMenu() {
+            if (navLinks.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Cerrar menú al hacer click en un enlace
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Cerrar menú con tecla Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
     </script>
+    <script src="/js/chat-widget.js?v=2.0.1" defer></script>
+    <script src="/js/google-ads-tracking.js" defer></script>
 </body>
 </html>

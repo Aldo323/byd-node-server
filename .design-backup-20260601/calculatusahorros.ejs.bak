@@ -1036,8 +1036,6 @@
         }
     </style>
     <link rel="stylesheet" href="/css/chat-widget.css">
-    <link rel="stylesheet" href="/css/ds.css?v=1">
-    <link rel="stylesheet" href="/css/calc.css?v=1">
 </head>
 <body>
     <!-- Premium Navigation -->
@@ -2070,7 +2068,6 @@
         });
     </script>
     <!-- Chat Widget Salma AI -->
-    <script src="/js/motion.js?v=1" defer></script>
     <script src="/js/chat-widget.js?v=2.0.1" defer></script>
 </body>
 </html>

@@ -1,0 +1,35 @@
+<div class="admin-layout">
+    <aside class="admin-side">
+        <div class="brand">
+            <img src="/images/byd/BYD-Logo.png" alt="BYD">
+            <span>Admin Salma</span>
+        </div>
+        <nav>
+            <a href="/admin" class="<%= active === 'dashboard' ? 'active' : '' %>"><i class="fas fa-gauge-high"></i> Dashboard</a>
+            <a href="/admin/entregas" class="<%= active === 'entregas' ? 'active' : '' %>"><i class="fas fa-car"></i> Entregas</a>
+            <a href="/admin/comentarios" class="<%= active === 'comentarios' ? 'active' : '' %>"><i class="fas fa-comments"></i> Comentarios</a>
+            <a href="/admin/promociones" class="<%= active === 'promociones' ? 'active' : '' %>"><i class="fas fa-bullhorn"></i> Promociones</a>
+            <a href="/admin/contenido" class="<%= active === 'contenido' ? 'active' : '' %>"><i class="fas fa-pen-to-square"></i> Contenido</a>
+        </nav>
+        <div class="footer-link">
+            <a href="/" target="_blank"><i class="fas fa-up-right-from-square"></i> Ver sitio público</a><br>
+            <form action="/admin/logout" method="POST" style="margin-top: 0.5rem;">
+                <button type="submit" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 0.85rem; padding: 0; font-family: inherit;">
+                    <i class="fas fa-right-from-bracket"></i> Cerrar sesión
+                </button>
+            </form>
+        </div>
+    </aside>
+    <main class="admin-main">
+        <div class="admin-topbar">
+            <h1><%= pageTitle %></h1>
+            <% if (typeof admin !== 'undefined' && admin) { %>
+                <div class="admin-user">
+                    <div class="avatar"><%= admin.nombre.charAt(0).toUpperCase() %></div>
+                    <div class="meta">
+                        <strong><%= admin.nombre %></strong>
+                        <small><%= admin.role %></small>
+                    </div>
+                </div>
+            <% } %>
+        </div>
